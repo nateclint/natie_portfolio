@@ -26,6 +26,7 @@ class Project {
   String language;
   String description;
   List<String>? functionalities;
+  String hostUrl;
   String iconUrl;
   List<String>? imageUrls;
   int colorHex;
@@ -39,6 +40,7 @@ class Project {
     this.language = '',
     this.description = '',
     this.functionalities,
+    this.hostUrl = '',
     this.iconUrl = '',
     this.imageUrls,
     this.colorHex = 0x000000,
@@ -62,7 +64,7 @@ class Project {
 
 class Projects {
   static Future update() async {
-    
+
   }
 
   static Project aPum = Project(
@@ -89,6 +91,7 @@ class Projects {
       'Realtime facial detection',
       'View images from detected faces',
     ],
+    hostUrl: 'https://github.com/nateclint/aPum',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.teal.value,
@@ -116,6 +119,7 @@ class Projects {
       'Create quizzes with 5 different types of questions',
       'Play quizzes and view scores afterwards',
     ],
+    hostUrl: '',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.pink.value,
@@ -142,6 +146,7 @@ class Projects {
       'Preview note as markdown or its markdown output',
       'Settings menu: theming, default format values, and more…',
     ],
+    hostUrl: 'https://github.com/nateclint/nienote',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.grey.value,
@@ -175,6 +180,7 @@ class Projects {
           'resident accounts',
       '(Admin) Edit Help information',
     ],
+    hostUrl: '',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.amber.value,
@@ -203,6 +209,7 @@ class Projects {
       'Update user profile',
       'Settings: app theme & app language',
     ],
+    hostUrl: '',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.indigo.value,
@@ -220,6 +227,7 @@ class Projects {
         'Minh City University of Science. This app aims for ease of usage, '
         'fast response, a modern UI, and new advance features.',
     functionalities: [],
+    hostUrl: '',
     iconUrl: '',
     imageUrls: [],
     colorHex: Colors.green.value,
