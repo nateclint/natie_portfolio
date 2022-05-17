@@ -15,6 +15,7 @@ Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
       functionalities: (json['functionalities'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      hostUrl: json['hostUrl'] as String? ?? '',
       iconUrl: json['iconUrl'] as String? ?? '',
       imageUrls: (json['imageUrls'] as List<dynamic>?)
           ?.map((e) => e as String)
@@ -33,6 +34,7 @@ Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
       'language': instance.language,
       'description': instance.description,
       'functionalities': instance.functionalities,
+      'hostUrl': instance.hostUrl,
       'iconUrl': instance.iconUrl,
       'imageUrls': instance.imageUrls,
       'colorHex': instance.colorHex,
