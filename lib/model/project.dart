@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:natie_portfolio/firebase/db.dart';
 
 part 'project.g.dart';
 
@@ -64,13 +66,19 @@ class Project {
 
 class Projects {
   static Future update() async {
-
+    final projects = [aPum, lms, nieNote, nieFlat, letTutor, moodleMobile];
+    for (Project p in projects) {
+      await Db.setProject(p);
+    }
+    if (kDebugMode) {
+      print('Update complete');
+    }
   }
 
   static Project aPum = Project(
     id: 'a_pum',
     title: 'aPum',
-    author: 'Nate',
+    author: 'Nguyễn Gia Hưng',
     language: 'Android (Java)',
     description: 'An image gallery management application compact with '
         'features like: view photos, see photo information, favorite photos, '
@@ -130,7 +138,7 @@ class Projects {
   static Project nieNote = Project(
     id: 'nie_note',
     title: 'Nie Note',
-    author: 'Nate',
+    author: 'Nguyễn Gia Hưng',
     language: 'Android (Java)',
     description: 'A simple note taking application. Using markdown syntax, '
         'you can create the most eye-catching notes to record everything, '
@@ -157,7 +165,7 @@ class Projects {
   static Project nieFlat = Project(
     id: 'nie_flat',
     title: 'Nie Flat',
-    author: 'Nate',
+    author: 'Nguyễn Gia Hưng',
     language: 'Android (Java)',
     description: 'A social media app for those living in an apartment complex. '
         'Communicate easily with your roommates, and keep an eye on official '
@@ -191,7 +199,7 @@ class Projects {
   static Project letTutor = Project(
     id: 'let_tutor',
     title: 'LetTutor Copy',
-    author: 'Nate',
+    author: 'Nguyễn Gia Hưng',
     language: 'Flutter',
     description: 'A one-on-one learning app to improve your English skills. '
         'Search and see your favorite tutors, join interesting courses, and '
@@ -220,7 +228,7 @@ class Projects {
   static Project moodleMobile = Project(
     id: 'moodle_mobile',
     title: 'Moodle Mobile',
-    author: 'University project',
+    author: 'University graduation project',
     language: 'Flutter',
     description: 'An improved version of the mobile app created by Moodle '
         'developers, tailored for the needs of students and teachers in Ho Chi '

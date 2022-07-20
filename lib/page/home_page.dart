@@ -7,7 +7,12 @@ import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/model/project.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final String title;
+
+  const HomePage({
+    Key? key,
+    this.title = 'Gia Hưng - Mobile Developer',
+  }) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -15,7 +20,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  AppBar _appBar = AppBar();
+  PreferredSizeWidget _appBar = AppBar();
   Widget _body = Container();
   Widget _drawer = Container();
 
@@ -26,7 +31,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => _scaffoldKey.currentState!.openDrawer(),
       ),
       centerTitle: true,
-      title: const Text('A life of Natie'),
+      title: Text(widget.title),
       actions: [
         IconBtn(
           icon: const Icon(CupertinoIcons.search),
@@ -55,12 +60,10 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _initBody() {
-    _body = Center(
-      child: ListView(
-        children: [
-          ProjectItem(Projects.nieNote),
-        ],
-      ),
+    _body = ListView(
+      children: [
+        ProjectItem(Projects.nieNote),
+      ],
     );
   }
 
