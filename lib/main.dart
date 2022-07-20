@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'firebase_options.dart';
 import 'global/styles.dart';
+import 'global/themes.dart';
 import 'global/vars.dart';
 import 'page/home_page.dart';
 
@@ -24,28 +26,15 @@ class NatiePortfolio extends StatelessWidget {
     Vars.init(context);
 
     return MaterialApp(
-      title: 'A life of Natie',
+      title: 'Portfolio',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
 
-        cardTheme: CardTheme(
-          color: Theme.of(context).colorScheme.surface,
-          elevation: 8,
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.all(Radius.circular(12)),
-          ),
-        ),
-        appBarTheme: Theme.of(context).appBarTheme.copyWith(
-          backgroundColor: Theme.of(context).colorScheme.surface,
-          foregroundColor: Theme.of(context).colorScheme.onSurface,
-          centerTitle: true,
-        ),
-        drawerTheme: Theme.of(context).drawerTheme.copyWith(
-          backgroundColor: Colors.transparent,
-          width: 400,
-        ),
-      ),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+
+      themeMode: ThemeMode.system,
+      theme: Themes.light,
+      darkTheme: Themes.dark,
       home: const HomePage(),
     );
   }

@@ -1,0 +1,1 @@
+enum Lang { vi, en }

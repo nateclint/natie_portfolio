@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:natie_portfolio/common/buttons.dart';
 import 'package:natie_portfolio/common/content_item.dart';
-import 'package:natie_portfolio/common/image_view.dart';
+import 'package:natie_portfolio/common/list_view.dart';
+import 'package:natie_portfolio/global/dimens.dart';
+import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/model/project.dart';
 
@@ -37,17 +39,8 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(CupertinoIcons.search),
           onPressed: () {},
         ),
-        IconBtn(
-          // icon: const ImageView(
-          //   width: 20,
-          //   imageUrl: 'https://flagcdn.com/w20/vn.png',
-          //   placeholder: Text('vi', style: TextStyle(fontFamily: 'monospace')),
-          // ),
-          icon: const ImageView(
-            width: 20,
-            imageUrl: 'https://flagcdn.com/w20/us.png',
-            placeholder: Text('en', style: TextStyle(fontFamily: 'monospace')),
-          ),
+        LanguageBtn(
+          language: Lang.en,
           onPressed: () {},
         ),
         IconBtn(
@@ -60,39 +53,52 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _initBody() {
-    _body = ListView(
-      children: [
-        ProjectItem(Projects.nieNote),
-      ],
+    _body = SingleChildScrollView(
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimens.pageContentPaddingHorizontal,
+        vertical: Dimens.pageContentPaddingVertical,
+      ),
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: Dimens.pageContentMaxWidth),
+          child: PaddedColumn(
+            padding:
+                const EdgeInsets.symmetric(vertical: Dimens.projectItemPadding),
+            children: Projects.values
+                .where((p) => p.featured)
+                .map((p) => ProjectItem(p))
+                .toList(),
+          ),
+        ),
+      ),
     );
   }
 
   void _initDrawer() {
     _drawer = Drawer(
       child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: ListView(
-              children: [
-                DrawerHeader(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // App icon
-                      Container(height: 8),
-                      Text(
-                        'Navigate to',
-                        style: Styles.headerStyle
-                            .copyWith(color: Theme.of(context).primaryColor),
-                      ),
-                    ],
-                  ),
+        padding: const EdgeInsets.all(Dimens.drawerPadding),
+        child: CardItem(
+          child: ListView(
+            children: [
+              DrawerHeader(
+                child: PaddedColumn(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Dimens.drawerItemPadding),
+                  children: [
+                    // App icon
+                    Text(
+                      'Navigate to',
+                      style: Styles.headerStyle
+                          .copyWith(color: Theme.of(context).primaryColor),
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

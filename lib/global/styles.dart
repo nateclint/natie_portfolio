@@ -7,14 +7,16 @@ class Styles {
     _context = context;
   }
 
-  /// Style for header text
-  static TextStyle headerStyle = TextStyle(
+  /// Common styles
+  static TextStyle get headerStyle => TextStyle(
     color: Theme.of(_context!).primaryColor,
     fontSize: 24,
     fontWeight: FontWeight.bold,
   );
-
-  /// Style for footer text
+  static TextStyle get subHeaderStyle => TextStyle(
+    color: Theme.of(_context!).primaryColor,
+    fontSize: 14,
+  );
   static TextStyle footerStyle = const TextStyle(
     color: Colors.black54,
   );
