@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'global/strings.dart';
 import 'global/styles.dart';
-import 'global/themes.dart';
 import 'global/vars.dart';
 import 'store/language_store.dart';
 import 'store/theme_store.dart';
@@ -49,12 +48,15 @@ class NatiePortfolio extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           // Pages
-          home: Builder(builder: (context) {
-            Strings.init(context);
-            Styles.init(context);
-            Vars.init(context);
-            return const HomePage();
-          }),
+          initialRoute: Routes.home,
+          routes: {
+            Routes.home: (context) => Builder(builder: (context) {
+                  Strings.init(context);
+                  Styles.init(context);
+                  Vars.init(context);
+                  return const HomePage();
+                }),
+          },
         );
       },
     );

@@ -29,3 +29,8 @@ class Strings {
 
   static String get title => language == Language.en ? titleEn : titleVi;
 }
+
+class Routes {
+  static const home = '/';
+  static const about = '/about';
+}
