@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-import 'package:natie_portfolio/model/project.dart';
+import 'package:natie_portfolio/data/model/project.dart';
 
 class Db {
   static FirebaseFirestore get db => FirebaseFirestore.instance;

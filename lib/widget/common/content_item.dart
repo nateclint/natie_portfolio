@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/global/styles.dart';
-import 'package:natie_portfolio/model/project.dart';
+import 'package:natie_portfolio/data/model/project.dart';
 
 import 'list_view.dart';
 

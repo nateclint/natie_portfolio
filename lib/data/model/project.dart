@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:natie_portfolio/firebase/db.dart';
+import 'package:natie_portfolio/data/firebase/db.dart';
 
 part 'project.g.dart';
 

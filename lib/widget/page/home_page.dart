@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:natie_portfolio/common/buttons.dart';
-import 'package:natie_portfolio/common/content_item.dart';
-import 'package:natie_portfolio/common/list_view.dart';
+import 'package:natie_portfolio/widget/common/buttons.dart';
+import 'package:natie_portfolio/widget/common/content_item.dart';
+import 'package:natie_portfolio/widget/common/list_view.dart';
 import 'package:natie_portfolio/global/dimens.dart';
-import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/styles.dart';
-import 'package:natie_portfolio/model/project.dart';
+import 'package:natie_portfolio/data/model/project.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
 
   const HomePage({
     Key? key,
-    this.title = 'Gia Hưng - Mobile Developer',
+    this.title = '',
   }) : super(key: key);
 
   @override
@@ -39,15 +38,8 @@ class _HomePageState extends State<HomePage> {
           icon: const Icon(CupertinoIcons.search),
           onPressed: () {},
         ),
-        LanguageBtn(
-          language: Lang.en,
-          onPressed: () {},
-        ),
-        IconBtn(
-          icon: const Icon(CupertinoIcons.sun_min),
-          // icon: const Icon(CupertinoIcons.moon),
-          onPressed: () {},
-        ),
+        const LanguageBtn(),
+        const ThemeBtn(),
       ],
     );
   }
@@ -61,7 +53,8 @@ class _HomePageState extends State<HomePage> {
       child: Align(
         alignment: Alignment.topCenter,
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: Dimens.pageContentMaxWidth),
+          constraints:
+              const BoxConstraints(maxWidth: Dimens.pageContentMaxWidth),
           child: PaddedColumn(
             padding:
                 const EdgeInsets.symmetric(vertical: Dimens.projectItemPadding),
