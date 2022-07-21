@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:natie_portfolio/global/dimens.dart';
+import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
+import 'package:natie_portfolio/store/language_store.dart';
+import 'package:provider/provider.dart';
 
 import 'list_view.dart';
 
@@ -34,33 +38,40 @@ class ProjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CardItem(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: PaddedColumn(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              padding: const EdgeInsets.symmetric(
-                  vertical: Dimens.projectItemContentPadding),
-              children: [
-                Text(p.title,
-                    style: Styles.headerStyle.copyWith(color: p.color)),
-                if (p.completionDate != null)
-                  Text(
-                    DateFormat.yMMMd(
-                            Localizations.localeOf(context).languageCode)
-                        .format(p.completionDate!),
-                    style: Styles.subHeaderStyle.copyWith(color: p.color),
-                  ),
-                Text(p.description, softWrap: true),
-              ],
-            ),
+    return Observer(
+      builder: (context) {
+        final isEn = Strings.language == Language.en;
+        return CardItem(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: PaddedColumn(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Dimens.projectItemContentPadding),
+                  children: [
+                    Text(p.title,
+                        style: Styles.headerStyle.copyWith(color: p.color)),
+                    if (p.completionDate != null)
+                      Text(
+                        DateFormat.yMMMMd(Strings.language.name)
+                            .format(p.completionDate!),
+                        style: Styles.subHeaderStyle.copyWith(color: p.color),
+                      ),
+                    Text(
+                      isEn ? p.description : p.descriptionVi,
+                      softWrap: true,
+                    ),
+                  ],
+                ),
+              ),
+              if (p.imageUrls.isNotEmpty) Image.network(p.imageUrls[0]),
+            ],
           ),
-          if (p.imageUrls.isNotEmpty) Image.network(p.imageUrls[0]),
-        ],
-      ),
+        );
+      },
     );
   }
 }

@@ -14,12 +14,18 @@ class Strings {
     final languageStore = _context!.read<LanguageStore>();
     switch (languageStore.activeLanguage) {
       case Language.system:
+        Locale locale = Localizations.localeOf(_context!);
+        return locale.languageCode == 'vi' ? Language.vi : Language.en;
       case Language.en:
       case Language.vi:
         return languageStore.activeLanguage;
     }
   }
 
+  static Locale get locale => Locale(language.name);
+
   static const titleEn = 'Gia Hưng - Mobile Developer';
   static const titleVi = 'Gia Hưng - Lập trình viên di động';
+
+  static String get title => language == Language.en ? titleEn : titleVi;
 }

@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
 import 'package:natie_portfolio/widget/common/content_item.dart';
 import 'package:natie_portfolio/widget/common/list_view.dart';
@@ -8,12 +11,7 @@ import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
 
 class HomePage extends StatefulWidget {
-  final String title;
-
-  const HomePage({
-    Key? key,
-    this.title = '',
-  }) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -32,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => _scaffoldKey.currentState!.openDrawer(),
       ),
       centerTitle: true,
-      title: Text(widget.title),
+      title: Observer(builder: (_) => Text(Strings.title)),
       actions: [
         IconBtn(
           icon: const Icon(CupertinoIcons.search),
@@ -84,7 +82,7 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     // App icon
                     Text(
-                      'Navigate to',
+                      AppLocalizations.of(context)!.navigate_to,
                       style: Styles.headerStyle
                           .copyWith(color: Theme.of(context).primaryColor),
                     ),

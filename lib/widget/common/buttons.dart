@@ -82,16 +82,12 @@ class LanguageBtn extends StatelessWidget {
         // Get data from store
         final languageStore = context.read<LanguageStore>();
         String imageUrl, placeholder;
-        switch (Strings.language) {
-          case Language.system:
-          case Language.en:
-            imageUrl = enImageUrl;
-            placeholder = 'en';
-            break;
-          case Language.vi:
-            imageUrl = viImageUrl;
-            placeholder = 'vi';
-            break;
+        if (Strings.language == Language.en) {
+          imageUrl = enImageUrl;
+          placeholder = 'en';
+        } else {
+          imageUrl = viImageUrl;
+          placeholder = 'vi';
         }
         // Build the button
         return IconBtn(

@@ -23,48 +23,36 @@ void main() async {
       Provider<ThemeStore>(create: (_) => ThemeStore()),
       Provider<LanguageStore>(create: (_) => LanguageStore()),
     ],
-    child: const NatiePortfolio(
-      title: Strings.titleEn,
-    ),
+    child: const NatiePortfolio(),
   ));
 }
 
 class NatiePortfolio extends StatelessWidget {
-  final String title;
-
-  const NatiePortfolio({
-    Key? key,
-    this.title = '',
-  }) : super(key: key);
+  const NatiePortfolio({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    Strings.init(context);
-    Styles.init(context);
-    Vars.init(context);
-
     return Observer(
       builder: (_) {
-        String title = this.title;
-        switch (Strings.language) {
-          case Language.system:
-          case Language.en:
-            title = Strings.titleEn;
-            break;
-          case Language.vi:
-            title = Strings.titleVi;
-            break;
-        }
         return MaterialApp(
-          title: title,
+          title: Strings.title,
           debugShowCheckedModeBanner: false,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
-          supportedLocales: AppLocalizations.supportedLocales,
+          // Theme
           themeMode: context.read<ThemeStore>().activeTheme,
           theme: Themes.light,
           darkTheme: Themes.dark,
-          home: HomePage(title: title),
+          // Locale
+          locale: Strings.locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          // Pages
+          home: Builder(builder: (context) {
+            Strings.init(context);
+            Styles.init(context);
+            Vars.init(context);
+            return const HomePage();
+          }),
         );
       },
     );
