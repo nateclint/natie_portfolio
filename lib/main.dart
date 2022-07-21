@@ -35,6 +35,8 @@ class NatiePortfolio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        context.read<ThemeStore>().getActiveTheme();
+        context.read<LanguageStore>().getActiveLanguage();
         return MaterialApp(
           title: Strings.title,
           debugShowCheckedModeBanner: false,

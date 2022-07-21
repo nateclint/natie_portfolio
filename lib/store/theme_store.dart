@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
+import 'package:natie_portfolio/data/shared_pref/shared_pref.dart';
 
 part 'theme_store.g.dart';
 
@@ -10,5 +11,11 @@ abstract class _ThemeStore with Store {
   ThemeMode activeTheme = ThemeMode.system;
 
   @action
-  void setActiveTheme(ThemeMode theme) => activeTheme = theme;
+  void getActiveTheme() async => activeTheme = await SharedPref.getTheme();
+
+  @action
+  void setActiveTheme(ThemeMode theme) {
+    activeTheme = theme;
+    SharedPref.setTheme(theme);
+  }
 }
