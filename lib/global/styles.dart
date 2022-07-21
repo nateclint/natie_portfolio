@@ -19,6 +19,9 @@ class Styles {
   static const TextStyle footerStyle = TextStyle(
     color: Colors.black54,
   );
+  static const TextStyle spacedTextStyle = TextStyle(
+    letterSpacing: 0.5,
+  );
 
   // Widget styles
   static const TextStyle iconBtnPlaceholderStyle =

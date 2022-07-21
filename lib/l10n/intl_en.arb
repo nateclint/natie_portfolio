@@ -1,3 +1,7 @@
 {
-  "navigate_to": "Navigate to"
+  "language": "Language",
+  "navigate_to": "Navigate to",
+  "navigation": "Navigation",
+  "search": "Search",
+  "theme": "Theme"
 }

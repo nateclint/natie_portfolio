@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/global/strings.dart';
@@ -11,38 +12,83 @@ import 'package:provider/provider.dart';
 import 'image_view.dart';
 
 class IconBtn extends StatelessWidget {
-  final Widget icon;
+  final Widget child;
+  final String tooltipText;
   final VoidCallback? onPressed;
 
   const IconBtn({
     Key? key,
-    this.icon = const Icon(Icons.question_mark_rounded),
+    required this.child,
+    this.tooltipText = '',
     this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      style: TextButton.styleFrom(
-        primary: Theme.of(context).colorScheme.onSurface,
-        padding: EdgeInsets.zero,
-        shape: const CircleBorder(),
+    return Tooltip(
+      message: tooltipText,
+      waitDuration: const Duration(seconds: 1),
+      child: TextButton(
+        style: TextButton.styleFrom(
+          primary: Theme.of(context).colorScheme.onSurface,
+          padding: EdgeInsets.zero,
+          shape: const CircleBorder(),
+        ),
+        child: child,
+        onPressed: onPressed,
       ),
-      child: icon,
+    );
+  }
+}
+
+class TextBtn extends StatelessWidget {
+  final Widget child;
+  final TextStyle? textStyle;
+  final bool hasFeedback;
+  final VoidCallback? onPressed;
+  final EdgeInsetsGeometry padding;
+
+  const TextBtn({
+    Key? key,
+    required this.child,
+    this.textStyle,
+    this.hasFeedback = true,
+    this.onPressed,
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: Dimens.btnPaddingHorizontal,
+      vertical: Dimens.btnPaddingVertical,
+    ),
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.all(textStyle?.color),
+        padding: MaterialStateProperty.all(padding),
+        shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(Dimens.btnRadius)),
+        )),
+        textStyle: MaterialStateProperty.all(textStyle),
+        splashFactory: hasFeedback ? null : NoSplash.splashFactory,
+        overlayColor:
+            hasFeedback ? null : MaterialStateProperty.all(Colors.transparent),
+      ),
       onPressed: onPressed,
+      child: child,
     );
   }
 }
 
 class ElevatedBtn extends StatelessWidget {
-  final Widget text;
+  final Widget child;
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry padding;
   final bool circular;
 
   const ElevatedBtn({
     Key? key,
-    this.text = const Text(''),
+    required this.child,
     this.onPressed,
     this.padding = const EdgeInsets.symmetric(
       horizontal: Dimens.btnPaddingHorizontal,
@@ -64,7 +110,7 @@ class ElevatedBtn extends StatelessWidget {
               ),
       ),
       onPressed: onPressed,
-      child: text,
+      child: child,
     );
   }
 }
@@ -91,7 +137,8 @@ class LanguageBtn extends StatelessWidget {
         }
         // Build the button
         return IconBtn(
-          icon: ImageView(
+          tooltipText: AppLocalizations.of(context)!.language,
+          child: ImageView(
             width: Dimens.iconBtnSize,
             imageUrl: imageUrl,
             placeholder: Text(
@@ -117,7 +164,8 @@ class ThemeBtn extends StatelessWidget {
         final themeStore = context.read<ThemeStore>();
         final isDarkMode = themeStore.activeTheme == ThemeMode.dark;
         return IconBtn(
-          icon: isDarkMode
+          tooltipText: AppLocalizations.of(context)!.theme,
+          child: isDarkMode
               ? const Icon(CupertinoIcons.moon)
               : const Icon(CupertinoIcons.sun_min),
           onPressed: () => themeStore

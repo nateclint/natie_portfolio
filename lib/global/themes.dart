@@ -34,6 +34,11 @@ class Themes {
         backgroundColor: from.colorScheme.surface,
         foregroundColor: from.colorScheme.onSurface,
         centerTitle: true,
+        titleTextStyle: TextStyle(
+          color: from.colorScheme.onSurface.withOpacity(.75),
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       bottomNavigationBarTheme: from.bottomNavigationBarTheme.copyWith(
         backgroundColor: from.colorScheme.surface,

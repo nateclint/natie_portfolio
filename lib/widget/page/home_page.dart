@@ -23,17 +23,32 @@ class _HomePageState extends State<HomePage> {
   Widget _body = Container();
   Widget _drawer = Container();
 
+  final _scrollController = ScrollController();
+
   void _initAppBar() {
     _appBar = AppBar(
       leading: IconBtn(
-        icon: const Icon(Icons.menu_rounded),
+        tooltipText: AppLocalizations.of(context)!.navigation,
+        child: const Icon(Icons.menu_rounded),
         onPressed: () => _scaffoldKey.currentState!.openDrawer(),
       ),
       centerTitle: true,
-      title: Observer(builder: (_) => Text(Strings.title)),
+      title: Observer(
+        builder: (_) => TextBtn(
+          child: Text(Strings.title),
+          textStyle: Theme.of(context).appBarTheme.titleTextStyle,
+          hasFeedback: false,
+          onPressed: () => _scrollController.animateTo(
+            0,
+            duration: const Duration(milliseconds: 600),
+            curve: Curves.easeOut,
+          ),
+        ),
+      ),
       actions: [
         IconBtn(
-          icon: const Icon(CupertinoIcons.search),
+          tooltipText: AppLocalizations.of(context)!.search,
+          child: const Icon(CupertinoIcons.search),
           onPressed: () {},
         ),
         const LanguageBtn(),
@@ -44,6 +59,7 @@ class _HomePageState extends State<HomePage> {
 
   void _initBody() {
     _body = SingleChildScrollView(
+      controller: _scrollController,
       padding: const EdgeInsets.symmetric(
         horizontal: Dimens.pageContentPaddingHorizontal,
         vertical: Dimens.pageContentPaddingVertical,

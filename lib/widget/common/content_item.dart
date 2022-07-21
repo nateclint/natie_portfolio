@@ -5,8 +5,6 @@ import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
-import 'package:natie_portfolio/store/language_store.dart';
-import 'package:provider/provider.dart';
 
 import 'list_view.dart';
 
@@ -62,6 +60,8 @@ class ProjectItem extends StatelessWidget {
                       ),
                     Text(
                       isEn ? p.description : p.descriptionVi,
+                      style: Styles.spacedTextStyle,
+                      textAlign: TextAlign.justify,
                       softWrap: true,
                     ),
                   ],
