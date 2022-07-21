@@ -26,7 +26,7 @@ class SharedPref {
 
   static Future<Language> getLanguage() async {
     final prefs = await instance;
-    final l = prefs.getString(theme) ?? Language.system.name;
+    final l = prefs.getString(language) ?? Language.system.name;
     return Language.values.firstWhere((ln) => ln.name == l);
   }
 
