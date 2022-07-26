@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:natie_portfolio/global/strings.dart';
+import 'package:natie_portfolio/global/vars.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
 import 'package:natie_portfolio/widget/common/content_item.dart';
 import 'package:natie_portfolio/widget/common/list_view.dart';
@@ -40,7 +41,7 @@ class _HomePageState extends State<HomePage> {
           hasFeedback: false,
           onPressed: () => _scrollController.animateTo(
             0,
-            duration: const Duration(milliseconds: 600),
+            duration: Vars.animationSlow,
             curve: Curves.easeOut,
           ),
         ),

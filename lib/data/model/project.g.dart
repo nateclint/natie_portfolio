@@ -27,7 +27,9 @@ Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
       imageUrls: (json['imageUrls'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          const <String>[],
+          const <String>[
+            'https://static.vecteezy.com/system/resources/previews/008/520/175/original/hand-holding-smartphone-with-screen-mockup-png.png'
+          ],
       colorHex: json['colorHex'] as int? ?? 0x000000,
       completionTimestamp: json['completionTimestamp'] as int?,
       featured: json['featured'] as bool? ?? false,

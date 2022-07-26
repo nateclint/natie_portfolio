@@ -12,10 +12,11 @@ abstract class _ThemeStore with Store {
   ThemeMode activeTheme = ThemeMode.system;
 
   @action
-  void getActiveTheme() async => activeTheme = await SharedPref.getTheme();
+  Future<void> getActiveTheme() async => activeTheme = await SharedPref
+      .getTheme();
 
   @action
-  void setActiveTheme(ThemeMode theme) async {
+  Future<void> setActiveTheme(ThemeMode theme) async {
     if (await SharedPref.setTheme(theme)) {
       activeTheme = theme;
     } else {

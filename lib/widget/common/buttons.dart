@@ -13,12 +13,14 @@ import 'image_view.dart';
 
 class IconBtn extends StatelessWidget {
   final Widget child;
+  final Color? color;
   final String tooltipText;
   final VoidCallback? onPressed;
 
   const IconBtn({
     Key? key,
     required this.child,
+    this.color,
     this.tooltipText = '',
     this.onPressed,
   }) : super(key: key);
@@ -30,7 +32,7 @@ class IconBtn extends StatelessWidget {
       waitDuration: const Duration(seconds: 1),
       child: TextButton(
         style: TextButton.styleFrom(
-          primary: Theme.of(context).colorScheme.onSurface,
+          primary: color ?? Theme.of(context).colorScheme.onSurface,
           padding: EdgeInsets.zero,
           shape: const CircleBorder(),
         ),
@@ -82,6 +84,7 @@ class TextBtn extends StatelessWidget {
 
 class ElevatedBtn extends StatelessWidget {
   final Widget child;
+  final Color? color;
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry padding;
   final bool circular;
@@ -89,6 +92,7 @@ class ElevatedBtn extends StatelessWidget {
   const ElevatedBtn({
     Key? key,
     required this.child,
+    this.color,
     this.onPressed,
     this.padding = const EdgeInsets.symmetric(
       horizontal: Dimens.btnPaddingHorizontal,
@@ -101,6 +105,7 @@ class ElevatedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        primary: color ?? Theme.of(context).primaryColor,
         padding: padding,
         shape: circular
             ? const CircleBorder()
@@ -173,5 +178,21 @@ class ThemeBtn extends StatelessWidget {
         );
       },
     );
+  }
+}
+
+class BackBtn extends StatelessWidget {
+  const BackBtn({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Builder(builder: (context) {
+      if (!Navigator.of(context).canPop()) return Container();
+      return IconBtn(
+        tooltipText: AppLocalizations.of(context)!.back,
+        child: const Icon(Icons.arrow_back_ios_new),
+        onPressed: () => Navigator.of(context).pop(),
+      );
+    });
   }
 }

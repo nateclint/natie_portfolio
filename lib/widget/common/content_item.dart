@@ -48,6 +48,7 @@ class ProjectItem extends StatelessWidget {
           child: CardItem(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Expanded(
                   child: PaddedColumn(
@@ -76,7 +77,10 @@ class ProjectItem extends StatelessWidget {
                   ),
                 ),
                 if (project.imageUrls.isNotEmpty)
-                  RoundedImageView(project.imageUrls[0]),
+                  RoundedImageView(
+                    project.imageUrls[0],
+                    width: Dimens.projectItemImageWidth,
+                  ),
               ],
             ),
           ),

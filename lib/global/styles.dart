@@ -7,11 +7,10 @@ class Styles {
 
   static void init(BuildContext context) => _context = context;
 
-  /// Common styles
+  // Common styles
   static TextStyle get headerStyle => TextStyle(
+        fontSize: 20,
         color: Theme.of(_context!).primaryColor,
-        fontSize: 24,
-        fontWeight: FontWeight.bold,
       );
 
   static TextStyle get subHeaderStyle => TextStyle(
@@ -26,8 +25,15 @@ class Styles {
   );
 
   // Widget styles
-  static const TextStyle iconBtnErrorStyle =
-      TextStyle(fontFamily: 'monospace');
+  static TextStyle get bannerDescriptionStyle =>
+      spacedTextStyle.copyWith(fontSize: 20);
+  static const TextStyle bannerTitleStyle = TextStyle(
+    fontSize: 64,
+    fontWeight: FontWeight.bold,
+  );
+  static const TextStyle bannerActionStyle = TextStyle(fontSize: 16);
+
+  static const TextStyle iconBtnErrorStyle = TextStyle(fontFamily: 'monospace');
 }
 
 class Themes {
@@ -91,8 +97,8 @@ class Themes {
         ),
       ),
       chipTheme: ChipThemeData(
-        shape: StadiumBorder(
-            side: BorderSide(color: initialTheme.primaryColor)),
+        shape:
+            StadiumBorder(side: BorderSide(color: initialTheme.primaryColor)),
         backgroundColor: initialTheme.primaryColor.withOpacity(.25),
         selectedColor: initialTheme.primaryColor.withOpacity(.75),
       ),

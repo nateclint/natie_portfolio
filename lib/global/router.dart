@@ -33,7 +33,7 @@ class Router {
                     Styles.init(context);
                     Vars.init(context);
                     return const HomePage();
-                    // return ProjectPage(project: Projects.nieNote);
+                    // return ProjectPage(project: Projects.lms);
                   }));
         case Routes.project:
           if (settings.arguments is! Project) {

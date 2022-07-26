@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:intl/intl.dart';
 import 'package:natie_portfolio/global/router.dart';
-import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/vars.dart';
+import 'package:natie_portfolio/store/animation_store.dart';
+import 'package:natie_portfolio/widget/common/banner_item.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
-import 'package:natie_portfolio/widget/common/list_view.dart';
 import 'package:natie_portfolio/global/dimens.dart';
-import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
 
 class ProjectPage extends StatefulWidget {
@@ -23,82 +21,66 @@ class ProjectPage extends StatefulWidget {
 class _ProjectPageState extends State<ProjectPage> {
   late Project _project;
 
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   PreferredSizeWidget _appBar = AppBar();
   Widget _body = Container();
 
-  var _initDone = false;
+  final AnimationStore introAni = AnimationStore();
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
     _project = widget.project;
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => setState(() => _initDone = true));
+    WidgetsBinding.instance.addPostFrameCallback((_) => introAni.start());
   }
 
   void _initAppBar() {
     _appBar = AppBar(
-      leading: IconBtn(
-        tooltipText: AppLocalizations.of(context)!.back,
-        child: const Icon(Icons.arrow_back_ios),
-        onPressed: () => Navigator.of(context).pop(),
-      ),
+      leading: const BackBtn(),
       centerTitle: true,
-      title: AnimatedOpacity(
-        opacity: _initDone ? 1 : 0,
-        duration: Vars.animationFast,
-        child: TextBtn(
-          child: Text(_project.title),
-          textStyle: Theme.of(context).appBarTheme.titleTextStyle,
-          hasFeedback: false,
-          onPressed: () => _scrollController.animateTo(
-            0,
-            duration: const Duration(milliseconds: 600),
-            curve: Curves.easeOut,
+      title: Observer(builder: (context) {
+        return AnimatedOpacity(
+          opacity: introAni.willStart ? 1 : 0,
+          duration: Vars.animationFast,
+          child: TextBtn(
+            child: Text(_project.title),
+            textStyle: Theme.of(context).appBarTheme.titleTextStyle,
+            hasFeedback: false,
+            onPressed: () => _scrollController.animateTo(
+              0,
+              duration: Vars.animationSlow,
+              curve: Curves.easeOut,
+            ),
           ),
-        ),
-      ),
+        );
+      }),
       actions: const [LanguageBtn(), ThemeBtn()],
     );
   }
 
   void _initBody() {
-    _body = Observer(builder: (context) {
-      final isEn = Strings.language == Language.en;
-      return SingleChildScrollView(
-        controller: _scrollController,
-        padding: const EdgeInsets.symmetric(
-          horizontal: Dimens.pageContentPaddingHorizontal,
-          vertical: Dimens.pageContentPaddingVertical,
-        ),
-        child: Align(
-          alignment: Alignment.topCenter,
-          child: PaddedColumn(
-            padding: const EdgeInsets.symmetric(
-                vertical: Dimens.projectItemPadding),
-            children: [
-              Text(_project.title,
-                  style: Styles.headerStyle.copyWith(color: _project.color)),
-              if (_project.completionDate != null)
-                Text(
-                  DateFormat.yMMMMd(Strings.language.name)
-                      .format(_project.completionDate!),
-                  style:
-                      Styles.subHeaderStyle.copyWith(color: _project.color),
-                ),
-              Text(
-                isEn ? _project.description : _project.descriptionVi,
-                style: Styles.spacedTextStyle,
-                textAlign: TextAlign.justify,
-                softWrap: true,
+    _body = SingleChildScrollView(
+      controller: _scrollController,
+      child: Align(
+        alignment: Alignment.topCenter,
+        child: Column(
+          children: [
+            ProjectBanner(
+              project: _project,
+              actionLabel: Observer(
+                  builder: (context) =>
+                      Text(AppLocalizations.of(context)!.explore)),
+              onAction: () => _scrollController.animateTo(
+                Dimens.bannerHeight,
+                duration: Vars.animationSlow,
+                curve: Curves.easeOut,
               ),
-            ],
-          ),
+            ),
+            Container(height: 1000),
+          ],
         ),
-      );
-    });
+      ),
+    );
   }
 
   @override
@@ -114,7 +96,6 @@ class _ProjectPageState extends State<ProjectPage> {
         margin: EdgeInsets.zero,
         shape: const RoundedRectangleBorder(side: BorderSide.none),
         child: Scaffold(
-          key: _scaffoldKey,
           appBar: _appBar,
           body: _body,
         ),

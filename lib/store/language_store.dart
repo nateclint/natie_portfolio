@@ -12,11 +12,11 @@ abstract class _LanguageStore with Store {
   Language activeLanguage = Language.system;
 
   @action
-  void getActiveLanguage() async =>
+  Future<void> getActiveLanguage() async =>
       activeLanguage = await SharedPref.getLanguage();
 
   @action
-  void setActiveLanguage(Language language) async {
+  Future<void> setActiveLanguage(Language language) async {
     if (await SharedPref.setLanguage(language)) {
       activeLanguage = language;
     } else {

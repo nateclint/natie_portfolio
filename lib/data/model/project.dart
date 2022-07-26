@@ -55,7 +55,7 @@ class Project {
     this.functionalitiesVi = const <String>[],
     this.hostUrl = '',
     this.iconUrl = '',
-    this.imageUrls = const <String>[],
+    this.imageUrls = const <String>['https://static.vecteezy.com/system/resources/previews/008/520/175/original/hand-holding-smartphone-with-screen-mockup-png.png'],
     this.colorHex = 0x000000,
     this.completionTimestamp,
     this.featured = false,
@@ -100,7 +100,6 @@ class Projects {
     id: 'a_pum',
     title: 'aPum',
     author: 'Nguyễn Gia Hưng',
-    authorVi: '',
     language: 'Android (Java)',
     description: 'An image gallery management application compact with '
         'features like: view photos, see photo information, favorite photos, '
@@ -141,8 +140,6 @@ class Projects {
       'Xem ảnh từ khuôn mặt đã nhận dạng',
     ],
     hostUrl: 'https://github.com/nateclint/aPum',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.teal.value,
     completionTimestamp: DateTime(2021, 5).millisecondsSinceEpoch,
     featured: false,
@@ -184,9 +181,6 @@ class Projects {
       'Tạo bài quiz với 5 loại câu hỏi khác nhau',
       'Chơi bài quiz và xem điểm sau khi chơi',
     ],
-    hostUrl: '',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.pink.value,
     completionTimestamp: DateTime(2021, 9).millisecondsSinceEpoch,
     featured: false,
@@ -196,7 +190,6 @@ class Projects {
     id: 'nie_note',
     title: 'Nie Note',
     author: 'Nguyễn Gia Hưng',
-    authorVi: '',
     language: 'Android (Java)',
     description: 'A simple note taking application. Using markdown syntax, '
         'you can create the most eye-catching notes to record everything, '
@@ -230,8 +223,6 @@ class Projects {
           'nhiều hơn nữa…',
     ],
     hostUrl: 'https://github.com/nateclint/nienote',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.grey.value,
     completionTimestamp: DateTime(2021, 10).millisecondsSinceEpoch,
     featured: true,
@@ -241,7 +232,6 @@ class Projects {
     id: 'nie_flat',
     title: 'Nie Flat',
     author: 'Nguyễn Gia Hưng',
-    authorVi: '',
     language: 'Android (Java)',
     description: 'A social media app for those living in an apartment complex. '
         'Communicate easily with your roommates, and keep an eye on official '
@@ -284,9 +274,6 @@ class Projects {
       '[Admin] Quản lý cư dân: Tìm kiếm & thêm cư dân, vô hiệu hoá tài khoản',
       '[Admin] Sửa thông tin trợ giúp/cứu trợ',
     ],
-    hostUrl: '',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.amber.value,
     completionTimestamp: DateTime(2021, 12).millisecondsSinceEpoch,
     featured: true,
@@ -294,9 +281,8 @@ class Projects {
 
   static Project letTutor = Project(
     id: 'let_tutor',
-    title: 'LetTutor Copy',
+    title: 'LetTutor Clone',
     author: 'Nguyễn Gia Hưng',
-    authorVi: '',
     language: 'Flutter',
     description: 'A one-on-one learning app to improve your English skills. '
         'Search and see your favorite tutors, join interesting courses, and '
@@ -329,9 +315,6 @@ class Projects {
       'Cập nhật thông tin cá nhân',
       'Cài đặt: chủ đề app và ngôn ngữ',
     ],
-    hostUrl: '',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.indigo.value,
     completionTimestamp: DateTime(2022, 5).millisecondsSinceEpoch,
     featured: true,
@@ -352,11 +335,6 @@ class Projects {
         'và giảng viên trong trường Đại học Khoa học tự nhiên. Ứng dụng nhắm '
         'đến sự tiện lợi, phản hồi nhanh, giao diện hiện đại, và hỗ trợ các '
         'tính năng nâng cao mới.',
-    functionalities: [],
-    functionalitiesVi: [],
-    hostUrl: '',
-    iconUrl: '',
-    imageUrls: [],
     colorHex: Colors.green.value,
     completionTimestamp: DateTime(2022, 8).millisecondsSinceEpoch,
     featured: true,

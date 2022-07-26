@@ -25,18 +25,21 @@ mixin _$LanguageStore on _LanguageStore, Store {
     });
   }
 
-  late final _$_LanguageStoreActionController =
-      ActionController(name: '_LanguageStore', context: context);
+  late final _$getActiveLanguageAsyncAction =
+      AsyncAction('_LanguageStore.getActiveLanguage', context: context);
 
   @override
-  void setActiveLanguage(Language language) {
-    final _$actionInfo = _$_LanguageStoreActionController.startAction(
-        name: '_LanguageStore.setActiveLanguage');
-    try {
-      return super.setActiveLanguage(language);
-    } finally {
-      _$_LanguageStoreActionController.endAction(_$actionInfo);
-    }
+  Future getActiveLanguage() {
+    return _$getActiveLanguageAsyncAction.run(() => super.getActiveLanguage());
+  }
+
+  late final _$setActiveLanguageAsyncAction =
+      AsyncAction('_LanguageStore.setActiveLanguage', context: context);
+
+  @override
+  Future setActiveLanguage(Language language) {
+    return _$setActiveLanguageAsyncAction
+        .run(() => super.setActiveLanguage(language));
   }
 
   @override

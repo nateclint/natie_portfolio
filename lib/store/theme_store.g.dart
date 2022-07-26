@@ -25,18 +25,20 @@ mixin _$ThemeStore on _ThemeStore, Store {
     });
   }
 
-  late final _$_ThemeStoreActionController =
-      ActionController(name: '_ThemeStore', context: context);
+  late final _$getActiveThemeAsyncAction =
+      AsyncAction('_ThemeStore.getActiveTheme', context: context);
 
   @override
-  void setActiveTheme(ThemeMode theme) {
-    final _$actionInfo = _$_ThemeStoreActionController.startAction(
-        name: '_ThemeStore.setActiveTheme');
-    try {
-      return super.setActiveTheme(theme);
-    } finally {
-      _$_ThemeStoreActionController.endAction(_$actionInfo);
-    }
+  Future getActiveTheme() {
+    return _$getActiveThemeAsyncAction.run(() => super.getActiveTheme());
+  }
+
+  late final _$setActiveThemeAsyncAction =
+      AsyncAction('_ThemeStore.setActiveTheme', context: context);
+
+  @override
+  Future setActiveTheme(ThemeMode theme) {
+    return _$setActiveThemeAsyncAction.run(() => super.setActiveTheme(theme));
   }
 
   @override
