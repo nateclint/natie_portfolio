@@ -139,11 +139,11 @@ class LanguageBtn extends StatelessWidget {
         return IconBtn(
           tooltipText: AppLocalizations.of(context)!.language,
           child: ImageView(
+            imageUrl,
             width: Dimens.iconBtnSize,
-            imageUrl: imageUrl,
-            placeholder: Text(
+            errorWidget: Text(
               placeholder,
-              style: Styles.iconBtnPlaceholderStyle,
+              style: Styles.iconBtnErrorStyle,
             ),
           ),
           onPressed: () => languageStore.setActiveLanguage(

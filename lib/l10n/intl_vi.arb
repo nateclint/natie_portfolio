@@ -1,7 +1,9 @@
 {
+  "back": "Quay lại",
   "language": "Ngôn ngữ",
   "navigate_to": "Đi đến trang",
   "navigation": "Điều hướng",
+  "route_unknown": "Không tìm thấy đường dẫn {route}",
   "search": "Tìm kiếm",
   "theme": "Chủ đề"
 }

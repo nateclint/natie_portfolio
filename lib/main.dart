@@ -5,12 +5,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import 'firebase_options.dart';
+import 'global/router.dart' as rt;
 import 'global/strings.dart';
 import 'global/styles.dart';
-import 'global/vars.dart';
 import 'store/language_store.dart';
 import 'store/theme_store.dart';
-import 'widget/page/home_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -34,6 +33,7 @@ class NatiePortfolio extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (_) {
+        rt.Router.init(context);
         context.read<ThemeStore>().getActiveTheme();
         context.read<LanguageStore>().getActiveLanguage();
         return MaterialApp(
@@ -48,15 +48,8 @@ class NatiePortfolio extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           // Pages
-          initialRoute: Routes.home,
-          routes: {
-            Routes.home: (context) => Builder(builder: (context) {
-                  Strings.init(context);
-                  Styles.init(context);
-                  Vars.init(context);
-                  return const HomePage();
-                }),
-          },
+          initialRoute: rt.Routes.home,
+          onGenerateRoute: rt.Router.generateRoute,
         );
       },
     );

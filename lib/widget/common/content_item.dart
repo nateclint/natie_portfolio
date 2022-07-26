@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
 import 'package:natie_portfolio/global/dimens.dart';
+import 'package:natie_portfolio/global/router.dart';
 import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
 
+import 'image_view.dart';
 import 'list_view.dart';
 
 class CardItem extends StatelessWidget {
@@ -30,48 +32,56 @@ class CardItem extends StatelessWidget {
 }
 
 class ProjectItem extends StatelessWidget {
-  final Project p;
+  final Project project;
 
-  const ProjectItem(this.p, {Key? key}) : super(key: key);
+  const ProjectItem(this.project, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        final isEn = Strings.language == Language.en;
-        return CardItem(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: PaddedColumn(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  padding: const EdgeInsets.symmetric(
-                      vertical: Dimens.projectItemContentPadding),
-                  children: [
-                    Text(p.title,
-                        style: Styles.headerStyle.copyWith(color: p.color)),
-                    if (p.completionDate != null)
+    return Observer(builder: (context) {
+      final isEn = Strings.language == Language.en;
+      return InkWell(
+        onTap: () =>
+            Navigator.of(context).pushNamed(Routes.project, arguments: project),
+        child: Hero(
+          tag: '${Routes.project}/${project.id}',
+          child: CardItem(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: PaddedColumn(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    padding: const EdgeInsets.symmetric(
+                        vertical: Dimens.projectItemContentPadding),
+                    children: [
+                      Text(project.title,
+                          style: Styles.headerStyle
+                              .copyWith(color: project.color)),
+                      if (project.completionDate != null)
+                        Text(
+                          DateFormat.yMMMMd(Strings.language.name)
+                              .format(project.completionDate!),
+                          style: Styles.subHeaderStyle
+                              .copyWith(color: project.color),
+                        ),
                       Text(
-                        DateFormat.yMMMMd(Strings.language.name)
-                            .format(p.completionDate!),
-                        style: Styles.subHeaderStyle.copyWith(color: p.color),
+                        isEn ? project.description : project.descriptionVi,
+                        style: Styles.spacedTextStyle,
+                        textAlign: TextAlign.justify,
+                        softWrap: true,
                       ),
-                    Text(
-                      isEn ? p.description : p.descriptionVi,
-                      style: Styles.spacedTextStyle,
-                      textAlign: TextAlign.justify,
-                      softWrap: true,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              if (p.imageUrls.isNotEmpty) Image.network(p.imageUrls[0]),
-            ],
+                if (project.imageUrls.isNotEmpty)
+                  RoundedImageView(project.imageUrls[0]),
+              ],
+            ),
           ),
-        );
-      },
-    );
+        ),
+      );
+    });
   }
 }

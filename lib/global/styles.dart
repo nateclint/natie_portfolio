@@ -26,7 +26,7 @@ class Styles {
   );
 
   // Widget styles
-  static const TextStyle iconBtnPlaceholderStyle =
+  static const TextStyle iconBtnErrorStyle =
       TextStyle(fontFamily: 'monospace');
 }
 

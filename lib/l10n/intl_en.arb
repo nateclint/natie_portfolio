@@ -1,7 +1,18 @@
 {
+  "@route_unknown": {
+    "description": "Error for providing an unknown route.",
+    "placeholders": {
+      "route": {
+        "type": "String",
+        "example": "/null"
+      }
+    }
+  },
+  "back": "Back",
   "language": "Language",
   "navigate_to": "Navigate to",
   "navigation": "Navigation",
+  "route_unknown": "No route found for {route}",
   "search": "Search",
   "theme": "Theme"
 }
