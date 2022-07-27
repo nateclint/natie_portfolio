@@ -1,15 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:natie_portfolio/global/strings.dart';
 import 'package:natie_portfolio/global/vars.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
 import 'package:natie_portfolio/widget/common/content_item.dart';
 import 'package:natie_portfolio/widget/common/list_view.dart';
 import 'package:natie_portfolio/global/dimens.dart';
-import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
+import 'package:natie_portfolio/widget/common/text_view.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,16 +33,14 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => _scaffoldKey.currentState!.openDrawer(),
       ),
       centerTitle: true,
-      title: Observer(
-        builder: (_) => TextBtn(
-          child: Text(Strings.title),
-          textStyle: Theme.of(context).appBarTheme.titleTextStyle,
-          hasFeedback: false,
-          onPressed: () => _scrollController.animateTo(
-            0,
-            duration: Vars.animationSlow,
-            curve: Curves.easeOut,
-          ),
+      title: TextBtn(
+        child: TextView(textCallback: () => Strings.title),
+        textStyle: Theme.of(context).appBarTheme.titleTextStyle,
+        hasFeedback: false,
+        onPressed: () => _scrollController.animateTo(
+          0,
+          duration: Vars.animationSlow,
+          curve: Curves.easeOut,
         ),
       ),
       actions: [
@@ -98,10 +95,9 @@ class _HomePageState extends State<HomePage> {
                       vertical: Dimens.drawerItemPadding),
                   children: [
                     // App icon
-                    Text(
-                      AppLocalizations.of(context)!.navigate_to,
-                      style: Styles.headerStyle
-                          .copyWith(color: Theme.of(context).primaryColor),
+                    HeaderTextView(
+                      text: AppLocalizations.of(context)!.navigate_to,
+                      color: Theme.of(context).primaryColor,
                     ),
                   ],
                 ),

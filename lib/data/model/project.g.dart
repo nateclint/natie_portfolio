@@ -11,7 +11,7 @@ Project _$ProjectFromJson(Map<String, dynamic> json) => Project(
       title: json['title'] as String? ?? '',
       author: json['author'] as String? ?? '',
       authorVi: json['authorVi'] as String? ?? '',
-      language: json['language'] as String? ?? '',
+      tech: json['language'] as String? ?? '',
       description: json['description'] as String? ?? '',
       descriptionVi: json['descriptionVi'] as String? ?? '',
       functionalities: (json['functionalities'] as List<dynamic>?)
@@ -40,7 +40,7 @@ Map<String, dynamic> _$ProjectToJson(Project instance) => <String, dynamic>{
       'title': instance.title,
       'author': instance.author,
       'authorVi': instance.authorVi,
-      'language': instance.language,
+      'language': instance.tech,
       'description': instance.description,
       'descriptionVi': instance.descriptionVi,
       'functionalities': instance.functionalities,

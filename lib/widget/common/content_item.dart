@@ -4,11 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/global/router.dart';
 import 'package:natie_portfolio/global/strings.dart';
-import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/data/model/project.dart';
 
 import 'image_view.dart';
 import 'list_view.dart';
+import 'text_view.dart';
 
 class CardItem extends StatelessWidget {
   final Widget child;
@@ -38,54 +38,55 @@ class ProjectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      final isEn = Strings.language == Language.en;
-      return InkWell(
-        onTap: () =>
-            Navigator.of(context).pushNamed(Routes.project, arguments: project),
-        child: Hero(
-          tag: '${Routes.project}/${project.id}',
-          child: CardItem(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: PaddedColumn(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    padding: const EdgeInsets.symmetric(
-                        vertical: Dimens.projectItemContentPadding),
-                    children: [
-                      Text(project.title,
-                          style: Styles.headerStyle
-                              .copyWith(color: project.color)),
-                      if (project.completionDate != null)
-                        Text(
-                          DateFormat.yMMMMd(Strings.language.name)
-                              .format(project.completionDate!),
-                          style: Styles.subHeaderStyle
-                              .copyWith(color: project.color),
-                        ),
-                      Text(
-                        isEn ? project.description : project.descriptionVi,
-                        style: Styles.spacedTextStyle,
+    return InkWell(
+      onTap: () =>
+          Navigator.of(context).pushNamed(Routes.project, arguments: project),
+      child: Hero(
+        tag: '${Routes.project}/${project.id}',
+        child: CardItem(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: PaddedColumn(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: Dimens.projectItemContentPadding),
+                  children: [
+                    HeaderTextView(
+                      text: project.title,
+                      color: project.color,
+                    ),
+                    if (project.completionDate != null)
+                      SubheaderTextView(
+                          textCallback: () =>
+                              DateFormat.yMMMMd(Strings.language.name)
+                                  .format(project.completionDate!),
+                          color: project.color),
+                    Observer(builder: (context) {
+                      return TextView(
+                        text: Strings.isEn
+                            ? project.description
+                            : project.descriptionVi,
+                        spaced: true,
                         textAlign: TextAlign.justify,
                         softWrap: true,
-                      ),
-                    ],
-                  ),
+                      );
+                    }),
+                  ],
                 ),
-                if (project.imageUrls.isNotEmpty)
-                  RoundedImageView(
-                    project.imageUrls[0],
-                    width: Dimens.projectItemImageWidth,
-                  ),
-              ],
-            ),
+              ),
+              if (project.imageUrls.isNotEmpty)
+                RoundedImageView(
+                  project.imageUrls[0],
+                  width: Dimens.projectItemImageWidth,
+                ),
+            ],
           ),
         ),
-      );
-    });
+      ),
+    );
   }
 }

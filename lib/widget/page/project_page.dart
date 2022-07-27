@@ -8,6 +8,9 @@ import 'package:natie_portfolio/widget/common/banner_item.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
 import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/data/model/project.dart';
+import 'package:natie_portfolio/widget/common/image_view.dart';
+import 'package:natie_portfolio/widget/common/list_view.dart';
+import 'package:natie_portfolio/widget/common/text_view.dart';
 
 class ProjectPage extends StatefulWidget {
   final Project project;
@@ -43,7 +46,7 @@ class _ProjectPageState extends State<ProjectPage> {
           opacity: introAni.willStart ? 1 : 0,
           duration: Vars.animationFast,
           child: TextBtn(
-            child: Text(_project.title),
+            child: TextView(text: _project.title),
             textStyle: Theme.of(context).appBarTheme.titleTextStyle,
             hasFeedback: false,
             onPressed: () => _scrollController.animateTo(
@@ -61,24 +64,47 @@ class _ProjectPageState extends State<ProjectPage> {
   void _initBody() {
     _body = SingleChildScrollView(
       controller: _scrollController,
-      child: Align(
-        alignment: Alignment.topCenter,
-        child: Column(
-          children: [
-            ProjectBanner(
-              project: _project,
-              actionLabel: Observer(
-                  builder: (context) =>
-                      Text(AppLocalizations.of(context)!.explore)),
-              onAction: () => _scrollController.animateTo(
-                Dimens.bannerHeight,
-                duration: Vars.animationSlow,
-                curve: Curves.easeOut,
-              ),
+      child: PaddedColumn(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        paddingStartAndEnd: false,
+        padding: const EdgeInsets.symmetric(
+            vertical: Dimens.projectDetailsPaddingVertical),
+        children: [
+          // Banner
+          ProjectBanner(
+            project: _project,
+            onAction: () => _scrollController.animateTo(
+              Dimens.bannerHeight,
+              duration: Vars.animationSlow,
+              curve: Curves.easeOut,
             ),
-            Container(height: 1000),
-          ],
-        ),
+          ),
+
+          // Functionalities
+
+          // Technology used
+          HeaderTextView(
+            text: AppLocalizations.of(context)!.tech_used,
+            color: _project.color,
+            padding: const EdgeInsets.only(
+                left: Dimens.projectDetailsPaddingHorizontal),
+          ),
+          Center(
+            child: Wrap(
+              spacing: Dimens.projectDetailsItemPaddingHorizontal,
+              runSpacing: Dimens.projectDetailsItemPaddingVertical,
+              children: _project.tech.split(',').map((tech) {
+                final src = Vars.assets[tech] ?? '';
+                return SvgImageView(src,
+                    width: Dimens.projectDetailsItemSize,
+                    height: Dimens.projectDetailsItemSize,
+                    fit: BoxFit.fitHeight);
+              }).toList(),
+            ),
+          ),
+          Container(height: 1000),
+        ],
       ),
     );
   }

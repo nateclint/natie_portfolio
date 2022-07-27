@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="208" height="128" viewBox="0 0 208 128"
+  style="--selecton-font-size: 14px; --selecton-button-icon-height: 18.900000000000002px; --selecton-border-radius: 4px; --selecton-button-border-left: 1px solid var(--selection-button-background-hover); --selecton-button-border-right: none; --selecton-tooltip-inner-padding: 2px; --selecton-button-padding: 4px 10px; --selecton-handle-circle-radius: 12.5px; --selecton-search-tooltip-icon-size: 15px; --selecton-anim-duration: 200ms;">
+  <rect width="198" height="118" x="5" y="5" ry="10" stroke="#000" stroke-width="10" fill="none" />
+  <path d="M30 98V30h20l20 25 20-25h20v68H90V59L70 84 50 59v39zm125 0l-30-33h20V30h20v35h20z" />
+</svg>

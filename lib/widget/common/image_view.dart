@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ImageView extends StatelessWidget {
   final String src;
@@ -127,5 +128,55 @@ class RoundedImageView extends StatelessWidget {
         onFinish: onFinish,
       ),
     );
+  }
+}
+
+class SvgImageView extends StatelessWidget {
+  final String src;
+  final Widget? errorWidget;
+  final double? width;
+  final double? height;
+  final BoxFit fit;
+
+  const SvgImageView(
+    this.src, {
+    Key? key,
+    this.errorWidget,
+    this.width,
+    this.height,
+    this.fit = BoxFit.contain,
+  }) : super(key: key);
+
+  Widget _placeholderBuilder(context) => SizedBox(
+        width: width,
+        height: height,
+        child: const Center(
+          child: Padding(
+            padding: EdgeInsets.all(12),
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+
+  @override
+  Widget build(BuildContext context) {
+    try {
+      if (Uri.tryParse(src) == null) {
+        return SvgPicture.asset(src,
+            width: width,
+            height: height,
+            fit: fit,
+            placeholderBuilder: _placeholderBuilder);
+      } else {
+        return SvgPicture.network(src,
+            width: width,
+            height: height,
+            fit: fit,
+            placeholderBuilder: _placeholderBuilder);
+      }
+    } catch (e) {
+      return ImageView(src,
+          errorWidget: errorWidget, width: width, height: height, fit: fit);
+    }
   }
 }

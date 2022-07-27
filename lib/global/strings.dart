@@ -22,6 +22,8 @@ class Strings {
     }
   }
 
+  static bool get isEn => Strings.language == Language.en;
+
   static Locale get locale => Locale(language.name);
 
   static const titleEn = 'Gia Hưng - Mobile Developer';

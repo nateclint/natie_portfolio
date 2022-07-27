@@ -1,35 +1,40 @@
 import 'package:flutter/material.dart';
 
 import 'dimens.dart';
+import 'vars.dart';
 
 class Styles {
   static BuildContext? _context;
 
   static void init(BuildContext context) => _context = context;
 
-  // Common styles
+  // TextView styles
   static TextStyle get headerStyle => TextStyle(
-        fontSize: 20,
         color: Theme.of(_context!).primaryColor,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
       );
 
   static TextStyle get subHeaderStyle => TextStyle(
         color: Theme.of(_context!).primaryColor,
         fontSize: 14,
       );
-  static const TextStyle footerStyle = TextStyle(
-    color: Colors.black54,
-  );
+
+  static TextStyle get footerStyle => const TextStyle(
+        color: Colors.black54,
+      );
   static const TextStyle spacedTextStyle = TextStyle(
     letterSpacing: 0.5,
   );
 
   // Widget styles
-  static TextStyle get bannerDescriptionStyle =>
-      spacedTextStyle.copyWith(fontSize: 20);
   static const TextStyle bannerTitleStyle = TextStyle(
     fontSize: 64,
     fontWeight: FontWeight.bold,
+  );
+  static const TextStyle bannerDescriptionStyle = TextStyle(
+    fontSize: 20,
+    height: 1.5,
   );
   static const TextStyle bannerActionStyle = TextStyle(fontSize: 16);
 
@@ -42,7 +47,10 @@ class Themes {
   static ThemeData get dark => _generateTheme(from: ThemeData.dark());
 
   static ThemeData _generateTheme({required ThemeData from}) {
-    final initialTheme = ThemeData(primarySwatch: Colors.amber);
+    final initialTheme = ThemeData(
+      primarySwatch: Colors.amber,
+      fontFamily: Vars.fontText,
+    );
     return initialTheme.copyWith(
       // Global style
       backgroundColor: from.backgroundColor,
@@ -61,7 +69,14 @@ class Themes {
       ),
       hintColor: from.colorScheme.onSurface.withOpacity(.25),
       scaffoldBackgroundColor: from.scaffoldBackgroundColor,
-      textTheme: from.textTheme,
+      textTheme: initialTheme.textTheme.copyWith(
+        displayLarge: initialTheme.textTheme.displayLarge
+            ?.copyWith(fontFamily: Vars.fontDisplay),
+        displayMedium: initialTheme.textTheme.displayMedium
+            ?.copyWith(fontFamily: Vars.fontDisplay),
+        displaySmall: initialTheme.textTheme.displaySmall
+            ?.copyWith(fontFamily: Vars.fontDisplay),
+      ),
 
       // Widget style
       appBarTheme: from.appBarTheme.copyWith(

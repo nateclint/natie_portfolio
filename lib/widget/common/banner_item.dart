@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:natie_portfolio/data/model/project.dart';
 import 'package:natie_portfolio/global/dimens.dart';
@@ -10,13 +11,14 @@ import 'package:natie_portfolio/store/animation_store.dart';
 import 'buttons.dart';
 import 'image_view.dart';
 import 'list_view.dart';
+import 'text_view.dart';
 
 class BannerItem extends StatefulWidget {
   final Widget title;
   final Widget description;
   final String imageUrl;
   final Color? primary;
-  final Widget? actionLabel;
+  final Widget? action;
   final VoidCallback? onAction;
 
   const BannerItem({
@@ -25,7 +27,7 @@ class BannerItem extends StatefulWidget {
     required this.description,
     this.imageUrl = '',
     this.primary,
-    this.actionLabel,
+    this.action,
     this.onAction,
   }) : super(key: key);
 
@@ -56,7 +58,7 @@ class _BannerItemState extends State<BannerItem> {
     _description = widget.description;
     _imageUrl = widget.imageUrl;
     _primary = widget.primary ?? Theme.of(context).primaryColor;
-    _actionLabel = widget.actionLabel;
+    _actionLabel = widget.action;
     _onAction = widget.onAction;
   }
 
@@ -174,27 +176,31 @@ class _BannerItemState extends State<BannerItem> {
 
 class ProjectBanner extends StatelessWidget {
   final Project project;
-  final Widget? actionLabel;
   final VoidCallback? onAction;
 
   const ProjectBanner({
     Key? key,
     required this.project,
-    this.actionLabel,
     this.onAction,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BannerItem(
-      title: Text(project.title),
+      title: TextView(text: project.title),
       description: Observer(builder: (context) {
-        final isEn = Strings.language == Language.en;
-        return Text(isEn ? project.description : project.descriptionVi);
+        return TextView(
+          text: Strings.isEn ? project.description : project.descriptionVi,
+          spaced: true,
+          softWrap: true,
+        );
       }),
       imageUrl: project.imageUrls.isNotEmpty ? project.imageUrls[0] : '',
       primary: project.color,
-      actionLabel: actionLabel,
+      action: Observer(builder: (context) {
+        Strings.isEn;
+        return TextView(text: AppLocalizations.of(context)!.explore);
+      }),
       onAction: onAction,
     );
   }

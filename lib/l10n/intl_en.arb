@@ -15,5 +15,6 @@
   "navigation": "Navigation",
   "route_unknown": "No route found for {route}",
   "search": "Search",
-  "theme": "Theme"
+  "theme": "Theme",
+  "tech_used": "Technology used:"
 }

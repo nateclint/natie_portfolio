@@ -12,7 +12,7 @@ part 'project.g.dart';
 /// * [id]                  : Identifier for this project
 /// * [title]               : Name of this project
 /// * [author]              : Who made this / What this is made for
-/// * [language]            : Programming language / Framework used
+/// * [tech]            : Programming language / Framework used
 /// * [description]         : More info on this project
 /// * [functionalities]     : Functional requirements of this project
 /// * [iconUrl]             : Application icon of this project
@@ -31,7 +31,7 @@ class Project {
   String title;
   String author;
   String authorVi;
-  String language;
+  String tech;
   String description;
   String descriptionVi;
   List<String> functionalities;
@@ -48,14 +48,16 @@ class Project {
     this.title = '',
     this.author = '',
     this.authorVi = '',
-    this.language = '',
+    this.tech = '',
     this.description = '',
     this.descriptionVi = '',
     this.functionalities = const <String>[],
     this.functionalitiesVi = const <String>[],
     this.hostUrl = '',
     this.iconUrl = '',
-    this.imageUrls = const <String>['https://static.vecteezy.com/system/resources/previews/008/520/175/original/hand-holding-smartphone-with-screen-mockup-png.png'],
+    this.imageUrls = const <String>[
+      'https://static.vecteezy.com/system/resources/previews/008/520/175/original/hand-holding-smartphone-with-screen-mockup-png.png'
+    ],
     this.colorHex = 0x000000,
     this.completionTimestamp,
     this.featured = false,
@@ -100,7 +102,7 @@ class Projects {
     id: 'a_pum',
     title: 'aPum',
     author: 'Nguyễn Gia Hưng',
-    language: 'Android (Java)',
+    tech: 'android,java,sqlite,ml_kit',
     description: 'An image gallery management application compact with '
         'features like: view photos, see photo information, favorite photos, '
         'facial detection, and more…',
@@ -150,7 +152,7 @@ class Projects {
     title: 'LMS',
     author: 'Intern project at FPT Software',
     authorVi: 'Dự án thực tập tại FPT Software',
-    language: 'Android (Java)',
+    tech: 'android,java,mongodb',
     description: 'A mobile application for a learning management system. '
         'Inspired by Quizziz, this app lets its users to see and play '
         'quizzes, and let lecturers create their own quiz with multiple types '
@@ -190,7 +192,7 @@ class Projects {
     id: 'nie_note',
     title: 'Nie Note',
     author: 'Nguyễn Gia Hưng',
-    language: 'Android (Java)',
+    tech: 'android,java,sqlite,markdown',
     description: 'A simple note taking application. Using markdown syntax, '
         'you can create the most eye-catching notes to record everything, '
         'from your tasks, shopping list, to your snippets of code.',
@@ -232,7 +234,7 @@ class Projects {
     id: 'nie_flat',
     title: 'Nie Flat',
     author: 'Nguyễn Gia Hưng',
-    language: 'Android (Java)',
+    tech: 'android,java,firebase',
     description: 'A social media app for those living in an apartment complex. '
         'Communicate easily with your roommates, and keep an eye on official '
         'news. Admins also have a separate app to manage the rooms, residents, '
@@ -283,7 +285,7 @@ class Projects {
     id: 'let_tutor',
     title: 'LetTutor Clone',
     author: 'Nguyễn Gia Hưng',
-    language: 'Flutter',
+    tech: 'flutter,jitsi',
     description: 'A one-on-one learning app to improve your English skills. '
         'Search and see your favorite tutors, join interesting courses, and '
         'register as a tutor yourself. This Flutter app uses effective state '
@@ -325,7 +327,7 @@ class Projects {
     title: 'Moodle Mobile',
     author: 'University graduation project',
     authorVi: 'Đồ án tốt nghiệp đại học',
-    language: 'Flutter',
+    tech: 'flutter,moodle,firebase',
     description: 'An improved version of the mobile app created by Moodle '
         'developers, tailored for the needs of students and teachers in Ho Chi '
         'Minh City University of Science. This app aims for ease of usage, '
