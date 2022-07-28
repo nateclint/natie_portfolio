@@ -130,29 +130,20 @@ class LanguageBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        // Get data from store
-        final languageStore = context.read<LanguageStore>();
-        String imageUrl, placeholder;
-        if (Strings.language == Language.en) {
-          imageUrl = enImageUrl;
-          placeholder = 'en';
-        } else {
-          imageUrl = viImageUrl;
-          placeholder = 'vi';
-        }
         // Build the button
         return IconBtn(
           tooltipText: AppLocalizations.of(context)!.language,
           child: ImageView(
-            imageUrl,
+            Strings.isEn ? enImageUrl : viImageUrl,
             width: Dimens.iconBtnSize,
             errorWidget: Text(
-              placeholder,
+              Strings.isEn ? Language.en.name : Language.vi.name,
               style: Styles.iconBtnErrorStyle,
             ),
           ),
-          onPressed: () => languageStore.setActiveLanguage(
-              imageUrl == enImageUrl ? Language.vi : Language.en),
+          onPressed: () => context
+              .read<LanguageStore>()
+              .setActiveLanguage(Strings.isEn ? Language.vi : Language.en),
         );
       },
     );
@@ -166,15 +157,13 @@ class ThemeBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
-        final themeStore = context.read<ThemeStore>();
-        final isDarkMode = themeStore.activeTheme == ThemeMode.dark;
         return IconBtn(
           tooltipText: AppLocalizations.of(context)!.theme,
-          child: isDarkMode
+          child: Themes.isDarkMode
               ? const Icon(CupertinoIcons.moon)
               : const Icon(CupertinoIcons.sun_min),
-          onPressed: () => themeStore
-              .setActiveTheme(isDarkMode ? ThemeMode.light : ThemeMode.dark),
+          onPressed: () => context.read<ThemeStore>().setActiveTheme(
+              Themes.isDarkMode ? ThemeMode.light : ThemeMode.dark),
         );
       },
     );

@@ -8,6 +8,7 @@ import 'firebase_options.dart';
 import 'global/router.dart' as rt;
 import 'global/strings.dart';
 import 'global/styles.dart';
+import 'global/vars.dart';
 import 'store/language_store.dart';
 import 'store/theme_store.dart';
 
@@ -27,6 +28,13 @@ void main() async {
 
 class NatiePortfolio extends StatelessWidget {
   const NatiePortfolio({Key? key}) : super(key: key);
+
+  static init(BuildContext context) {
+    Strings.init(context);
+    Styles.init(context);
+    Themes.init(context);
+    Vars.init(context);
+  }
 
   // This widget is the root of your application.
   @override

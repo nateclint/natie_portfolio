@@ -2,12 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:natie_portfolio/data/model/project.dart';
+import 'package:natie_portfolio/main.dart';
 import 'package:natie_portfolio/widget/common/helper/snackbar.dart';
+import 'package:natie_portfolio/widget/page/home_page.dart';
 import 'package:natie_portfolio/widget/page/project_page.dart';
-
-import 'strings.dart';
-import 'styles.dart';
-import 'vars.dart';
 
 class Routes {
   static const home = '/';
@@ -18,9 +16,7 @@ class Routes {
 class Router {
   static BuildContext? _context;
 
-  static void init(BuildContext context) {
-    _context = context;
-  }
+  static void init(BuildContext context) => _context = context;
 
   static Route<dynamic>? generateRoute(RouteSettings settings) {
     try {
@@ -28,11 +24,9 @@ class Router {
         case Routes.home:
           return MaterialPageRoute(
               builder: (_) => Builder(builder: (context) {
-                    Strings.init(context);
-                    Styles.init(context);
-                    Vars.init(context);
-                    // return const HomePage();
-                    return ProjectPage(project: Projects.moodleMobile);
+                    NatiePortfolio.init(context);
+                    return const HomePage();
+                    // return ProjectPage(project: Projects.moodleMobile);
                   }));
         case Routes.project:
           if (settings.arguments is! Project) {

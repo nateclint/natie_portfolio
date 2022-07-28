@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                       vertical: Dimens.drawerItemPadding),
                   children: [
                     // App icon
-                    HeaderTextView(
+                    TextView.header(
                       text: AppLocalizations.of(context)!.navigate_to,
                       color: Theme.of(context).primaryColor,
                     ),

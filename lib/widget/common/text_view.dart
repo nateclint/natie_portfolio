@@ -39,6 +39,48 @@ class TextView extends StatelessWidget {
             textCallback != null && text == null),
         super(key: key);
 
+  TextView.header({
+    Key? key,
+    this.text,
+    this.textCallback,
+    this.color,
+    this.spaced = false,
+    this.padding = EdgeInsets.zero,
+    this.textAlign = TextAlign.start,
+    this.softWrap = false,
+  })  : style = Styles.headerStyle,
+        assert(text != null && textCallback == null ||
+            textCallback != null && text == null),
+        super(key: key);
+
+  TextView.subheader({
+    Key? key,
+    this.text,
+    this.textCallback,
+    this.color,
+    this.spaced = false,
+    this.padding = EdgeInsets.zero,
+    this.textAlign = TextAlign.start,
+    this.softWrap = false,
+  })  : style = Styles.subheaderStyle,
+        assert(text != null && textCallback == null ||
+            textCallback != null && text == null),
+        super(key: key);
+
+  TextView.footer({
+    Key? key,
+    this.text,
+    this.textCallback,
+    this.color,
+    this.spaced = false,
+    this.padding = EdgeInsets.zero,
+    this.textAlign = TextAlign.start,
+    this.softWrap = false,
+  })  : style = Styles.footerStyle,
+        assert(text != null && textCallback == null ||
+            textCallback != null && text == null),
+        super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -48,73 +90,4 @@ class TextView extends StatelessWidget {
           : Observer(builder: (context) => textWidget),
     );
   }
-}
-
-class HeaderTextView extends TextView {
-  HeaderTextView({
-    Key? key,
-    String? text,
-    String Function()? textCallback,
-    Color? color,
-    bool spaced = false,
-    EdgeInsets padding = EdgeInsets.zero,
-    TextAlign textAlign = TextAlign.start,
-    bool softWrap = false,
-  }) : super(
-          key: key,
-          text: text,
-          textCallback: textCallback,
-          color: color,
-          style: Styles.headerStyle,
-          spaced: spaced,
-          padding: padding,
-          textAlign: textAlign,
-          softWrap: softWrap,
-        );
-}
-
-class SubheaderTextView extends TextView {
-  SubheaderTextView({
-    Key? key,
-    String? text,
-    String Function()? textCallback,
-    Color? color,
-    bool spaced = false,
-    EdgeInsets padding = EdgeInsets.zero,
-    TextAlign textAlign = TextAlign.start,
-    bool softWrap = false,
-  }) : super(
-          key: key,
-          text: text,
-          textCallback: textCallback,
-          color: color,
-          style: Styles.subHeaderStyle,
-          spaced: spaced,
-          padding: padding,
-          textAlign: textAlign,
-          softWrap: softWrap,
-        );
-}
-
-class FooterTextView extends TextView {
-  FooterTextView({
-    Key? key,
-    String? text,
-    String Function()? textCallback,
-    Color? color,
-    bool spaced = false,
-    EdgeInsets padding = EdgeInsets.zero,
-    TextAlign textAlign = TextAlign.start,
-    bool softWrap = false,
-  }) : super(
-          key: key,
-          text: text,
-          textCallback: textCallback,
-          color: color,
-          style: Styles.footerStyle,
-          spaced: spaced,
-          padding: padding,
-          textAlign: textAlign,
-          softWrap: softWrap,
-        );
 }

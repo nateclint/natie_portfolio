@@ -23,7 +23,4 @@ class Vars {
   'moodle' : 'assets/tech/moodle.svg',
   'sqlite' : 'assets/tech/sqlite.svg',
 };
-
-  static const fontText = 'sf_text';
-  static const fontDisplay = 'sf_display';
 }

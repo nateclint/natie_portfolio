@@ -55,12 +55,12 @@ class ProjectItem extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: Dimens.projectItemContentPadding),
                   children: [
-                    HeaderTextView(
+                    TextView.header(
                       text: project.title,
                       color: project.color,
                     ),
                     if (project.completionDate != null)
-                      SubheaderTextView(
+                      TextView.subheader(
                           textCallback: () =>
                               DateFormat.yMMMMd(Strings.language.name)
                                   .format(project.completionDate!),

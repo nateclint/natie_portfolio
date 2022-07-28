@@ -84,7 +84,7 @@ class _ProjectPageState extends State<ProjectPage> {
           // Functionalities
 
           // Technology used
-          HeaderTextView(
+          TextView.header(
             text: AppLocalizations.of(context)!.tech_used,
             color: _project.color,
             padding: const EdgeInsets.only(

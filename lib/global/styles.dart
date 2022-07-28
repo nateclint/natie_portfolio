@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:natie_portfolio/store/theme_store.dart';
+import 'package:provider/provider.dart';
 
 import 'dimens.dart';
-import 'vars.dart';
 
 class Styles {
   static BuildContext? _context;
@@ -13,9 +14,10 @@ class Styles {
         color: Theme.of(_context!).primaryColor,
         fontSize: 20,
         fontWeight: FontWeight.bold,
+        fontFamily: Themes.fontDisplay,
       );
 
-  static TextStyle get subHeaderStyle => TextStyle(
+  static TextStyle get subheaderStyle => TextStyle(
         color: Theme.of(_context!).primaryColor,
         fontSize: 14,
       );
@@ -42,14 +44,38 @@ class Styles {
 }
 
 class Themes {
+  static BuildContext? _context;
+
+  static void init(BuildContext context) => _context = context;
+
+  static const fontText = 'sf_text';
+  static const fontDisplay = 'sf_display';
+
   static ThemeData get light => _generateTheme(from: ThemeData.light());
 
   static ThemeData get dark => _generateTheme(from: ThemeData.dark());
 
+  static ThemeMode get themeMode {
+    if (_context == null) return ThemeMode.light;
+    final themeStore = _context!.read<ThemeStore>();
+    switch (themeStore.activeTheme) {
+      case ThemeMode.system:
+        return ThemeMode.light;
+      case ThemeMode.light:
+      case ThemeMode.dark:
+        return themeStore.activeTheme;
+    }
+  }
+
+  static bool get isLightMode => themeMode == ThemeMode.light;
+
+  static bool get isDarkMode => themeMode == ThemeMode.dark;
+
   static ThemeData _generateTheme({required ThemeData from}) {
     final initialTheme = ThemeData(
       primarySwatch: Colors.amber,
-      fontFamily: Vars.fontText,
+      fontFamily: fontText,
+      textTheme: from.textTheme,
     );
     return initialTheme.copyWith(
       // Global style
@@ -71,11 +97,11 @@ class Themes {
       scaffoldBackgroundColor: from.scaffoldBackgroundColor,
       textTheme: initialTheme.textTheme.copyWith(
         displayLarge: initialTheme.textTheme.displayLarge
-            ?.copyWith(fontFamily: Vars.fontDisplay),
+            ?.copyWith(fontFamily: fontDisplay),
         displayMedium: initialTheme.textTheme.displayMedium
-            ?.copyWith(fontFamily: Vars.fontDisplay),
+            ?.copyWith(fontFamily: fontDisplay),
         displaySmall: initialTheme.textTheme.displaySmall
-            ?.copyWith(fontFamily: Vars.fontDisplay),
+            ?.copyWith(fontFamily: fontDisplay),
       ),
 
       // Widget style
