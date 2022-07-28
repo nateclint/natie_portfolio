@@ -46,7 +46,7 @@ class IconBtn extends StatelessWidget {
 class TextBtn extends StatelessWidget {
   final Widget child;
   final TextStyle? textStyle;
-  final bool hasFeedback;
+  final bool hoverFeedback;
   final VoidCallback? onPressed;
   final EdgeInsetsGeometry padding;
 
@@ -54,7 +54,7 @@ class TextBtn extends StatelessWidget {
     Key? key,
     required this.child,
     this.textStyle,
-    this.hasFeedback = true,
+    this.hoverFeedback = true,
     this.onPressed,
     this.padding = const EdgeInsets.symmetric(
       horizontal: Dimens.btnPaddingHorizontal,
@@ -72,9 +72,9 @@ class TextBtn extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(Dimens.btnRadius)),
         )),
         textStyle: MaterialStateProperty.all(textStyle),
-        splashFactory: hasFeedback ? null : NoSplash.splashFactory,
+        splashFactory: hoverFeedback ? null : NoSplash.splashFactory,
         overlayColor:
-            hasFeedback ? null : MaterialStateProperty.all(Colors.transparent),
+            hoverFeedback ? null : MaterialStateProperty.all(Colors.transparent),
       ),
       onPressed: onPressed,
       child: child,

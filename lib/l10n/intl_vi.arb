@@ -6,6 +6,8 @@
   "navigation": "Điều hướng",
   "route_unknown": "Không tìm thấy đường dẫn {route}",
   "search": "Tìm kiếm",
+  "tech_used": "Công nghệ sử dụng:",
   "theme": "Chủ đề",
-  "tech_used": "Công nghệ sử dụng:"
+  "what_you_can_do": "Với {name}, bạn có thể…",
+  "z": "Z"
 }

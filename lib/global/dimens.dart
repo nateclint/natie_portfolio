@@ -27,11 +27,15 @@ class Dimens {
   static const pageContentPaddingHorizontal = 12.0;
   static const pageContentPaddingVertical = 12.0;
 
-  static const projectDetailsItemPaddingHorizontal = 64.0;
-  static const projectDetailsItemPaddingVertical = 24.0;
-  static const projectDetailsItemSize = 64.0;
+  static const projectDetailsFuncHeight = 64.0;
+  static const projectDetailsFuncOffset = .1;
+  static const projectDetailsFuncPadding = 8.0;
+  static const projectDetailsFuncWidth = 360.0;
   static const projectDetailsPaddingHorizontal = 36.0;
   static const projectDetailsPaddingVertical = 24.0;
+  static const projectDetailsTechPaddingHorizontal = 64.0;
+  static const projectDetailsTechPaddingVertical = 24.0;
+  static const projectDetailsTechSize = 64.0;
 
   static const projectItemPadding = 16.0;
   static const projectItemContentPadding = 4.0;

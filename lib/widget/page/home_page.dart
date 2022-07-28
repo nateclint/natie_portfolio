@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       title: TextBtn(
         child: TextView(textCallback: () => Strings.title),
         textStyle: Theme.of(context).appBarTheme.titleTextStyle,
-        hasFeedback: false,
+        hoverFeedback: false,
         onPressed: () => _scrollController.animateTo(
           0,
           duration: Vars.animationSlow,

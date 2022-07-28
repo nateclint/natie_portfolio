@@ -49,7 +49,7 @@ class _BannerItemState extends State<BannerItem> {
   Widget _leftSide = Container();
   Widget _rightSide = Container();
 
-  final AnimationStore introAni = AnimationStore();
+  final AnimationStore _introAni = AnimationStore();
 
   @override
   void initState() {
@@ -60,6 +60,12 @@ class _BannerItemState extends State<BannerItem> {
     _primary = widget.primary ?? Theme.of(context).primaryColor;
     _actionLabel = widget.action;
     _onAction = widget.onAction;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initValues();
+      _initLeftSide();
+      _initRightSide();
+    });
   }
 
   void _initValues() {
@@ -126,16 +132,13 @@ class _BannerItemState extends State<BannerItem> {
       child: ImageView(
         _imageUrl,
         errorWidget: const Icon(Icons.error),
-        onFinish: () => introAni.start(),
+        onFinish: () => _introAni.start(),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    _initValues();
-    _initLeftSide();
-    _initRightSide();
     return Container(
       width: _screenSize.width,
       height: Dimens.bannerHeight,
@@ -144,25 +147,25 @@ class _BannerItemState extends State<BannerItem> {
         return Stack(
           children: [
             AnimatedSlide(
-              offset: introAni.willStart
+              offset: _introAni.willStart
                   ? Offset.zero
                   : const Offset(Dimens.bannerSlideOffset, 0),
               duration: Vars.animationSluggish,
               curve: Curves.easeOut,
               child: AnimatedOpacity(
-                opacity: introAni.willStart ? 1 : 0,
+                opacity: _introAni.willStart ? 1 : 0,
                 duration: Vars.animationFast,
                 child: _rightSide,
               ),
             ),
             AnimatedSlide(
-              offset: introAni.willStart
+              offset: _introAni.willStart
                   ? Offset.zero
                   : const Offset(-Dimens.bannerSlideOffset, 0),
               duration: Vars.animationSluggish,
               curve: Curves.easeOut,
               child: AnimatedOpacity(
-                opacity: introAni.willStart ? 1 : 0,
+                opacity: _introAni.willStart ? 1 : 0,
                 duration: Vars.animationFast,
                 child: _leftSide,
               ),

@@ -26,7 +26,7 @@ class Router {
               builder: (_) => Builder(builder: (context) {
                     NatiePortfolio.init(context);
                     return const HomePage();
-                    // return ProjectPage(project: Projects.moodleMobile);
+                    // return ProjectPage(project: Projects.lms);
                   }));
         case Routes.project:
           if (settings.arguments is! Project) {

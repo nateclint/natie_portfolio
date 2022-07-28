@@ -61,7 +61,9 @@ class Project {
     this.colorHex = 0x000000,
     this.completionTimestamp,
     this.featured = false,
-  });
+  }) : assert(functionalities.length == functionalitiesVi.length ||
+            functionalities.isEmpty && functionalitiesVi.isNotEmpty ||
+            functionalities.isNotEmpty && functionalitiesVi.isEmpty);
 
   Color get color => Color(colorHex);
 

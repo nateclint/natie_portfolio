@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -8,6 +10,7 @@ import 'package:natie_portfolio/widget/common/banner_item.dart';
 import 'package:natie_portfolio/widget/common/buttons.dart';
 import 'package:natie_portfolio/global/dimens.dart';
 import 'package:natie_portfolio/data/model/project.dart';
+import 'package:natie_portfolio/widget/common/content_item.dart';
 import 'package:natie_portfolio/widget/common/image_view.dart';
 import 'package:natie_portfolio/widget/common/list_view.dart';
 import 'package:natie_portfolio/widget/common/text_view.dart';
@@ -22,19 +25,19 @@ class ProjectPage extends StatefulWidget {
 }
 
 class _ProjectPageState extends State<ProjectPage> {
-  late Project _project;
+  late Project _p;
 
   PreferredSizeWidget _appBar = AppBar();
   Widget _body = Container();
 
-  final AnimationStore introAni = AnimationStore();
+  final AnimationStore _introAni = AnimationStore();
   final _scrollController = ScrollController();
 
   @override
   void initState() {
     super.initState();
-    _project = widget.project;
-    WidgetsBinding.instance.addPostFrameCallback((_) => introAni.start());
+    _p = widget.project;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _introAni.start());
   }
 
   void _initAppBar() {
@@ -43,12 +46,12 @@ class _ProjectPageState extends State<ProjectPage> {
       centerTitle: true,
       title: Observer(builder: (context) {
         return AnimatedOpacity(
-          opacity: introAni.willStart ? 1 : 0,
+          opacity: _introAni.willStart ? 1 : 0,
           duration: Vars.animationFast,
           child: TextBtn(
-            child: TextView(text: _project.title),
+            child: TextView(text: _p.title),
             textStyle: Theme.of(context).appBarTheme.titleTextStyle,
-            hasFeedback: false,
+            hoverFeedback: false,
             onPressed: () => _scrollController.animateTo(
               0,
               duration: Vars.animationSlow,
@@ -64,16 +67,18 @@ class _ProjectPageState extends State<ProjectPage> {
   void _initBody() {
     _body = SingleChildScrollView(
       controller: _scrollController,
+      padding: const EdgeInsets.symmetric(
+        horizontal: Dimens.pageContentPaddingHorizontal,
+        vertical: Dimens.pageContentPaddingVertical,
+      ),
       child: PaddedColumn(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
         paddingStartAndEnd: false,
         padding: const EdgeInsets.symmetric(
             vertical: Dimens.projectDetailsPaddingVertical),
         children: [
           // Banner
           ProjectBanner(
-            project: _project,
+            project: _p,
             onAction: () => _scrollController.animateTo(
               Dimens.bannerHeight,
               duration: Vars.animationSlow,
@@ -82,28 +87,36 @@ class _ProjectPageState extends State<ProjectPage> {
           ),
 
           // Functionalities
+          TextView.header(
+            text: AppLocalizations.of(context)!.what_you_can_do(_p.title),
+            color: _p.color,
+          ),
+          PaddedColumn(
+            paddingStartAndEnd: false,
+            padding: const EdgeInsets.symmetric(
+                vertical: Dimens.projectDetailsFuncPadding),
+            children: List.generate(
+                max(_p.functionalities.length, _p.functionalitiesVi.length),
+                (i) => FunctionalityItem(_p, i)),
+          ),
 
           // Technology used
+          // FIXME: Need a background to add visibility to the icons
           TextView.header(
             text: AppLocalizations.of(context)!.tech_used,
-            color: _project.color,
-            padding: const EdgeInsets.only(
-                left: Dimens.projectDetailsPaddingHorizontal),
+            color: _p.color,
           ),
-          Center(
-            child: Wrap(
-              spacing: Dimens.projectDetailsItemPaddingHorizontal,
-              runSpacing: Dimens.projectDetailsItemPaddingVertical,
-              children: _project.tech.split(',').map((tech) {
-                final src = Vars.assets[tech] ?? '';
-                return SvgImageView(src,
-                    width: Dimens.projectDetailsItemSize,
-                    height: Dimens.projectDetailsItemSize,
-                    fit: BoxFit.fitHeight);
-              }).toList(),
-            ),
+          Wrap(
+            spacing: Dimens.projectDetailsTechPaddingHorizontal,
+            runSpacing: Dimens.projectDetailsTechPaddingVertical,
+            children: _p.tech.split(',').map((tech) {
+              final src = Vars.assets[tech] ?? '';
+              return SvgImageView(src,
+                  width: Dimens.projectDetailsTechSize,
+                  height: Dimens.projectDetailsTechSize,
+                  fit: BoxFit.fitHeight);
+            }).toList(),
           ),
-          Container(height: 1000),
         ],
       ),
     );
@@ -115,7 +128,7 @@ class _ProjectPageState extends State<ProjectPage> {
     _initBody();
 
     return Hero(
-      tag: '${Routes.project}/${_project.id}',
+      tag: '${Routes.project}/${_p.id}',
       child: Card(
         color: Colors.transparent,
         elevation: 0,

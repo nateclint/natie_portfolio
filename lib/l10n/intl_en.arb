@@ -8,6 +8,15 @@
       }
     }
   },
+  "@what_you_can_do": {
+    "description": "Header for the functionality section of Project Details.",
+    "placeholders": {
+      "name": {
+        "type": "String",
+        "example": "Natie Portfolio"
+      }
+    }
+  },
   "back": "Back",
   "explore": "Explore more",
   "language": "Language",
@@ -15,6 +24,8 @@
   "navigation": "Navigation",
   "route_unknown": "No route found for {route}",
   "search": "Search",
+  "tech_used": "Technology used:",
   "theme": "Theme",
-  "tech_used": "Technology used:"
+  "what_you_can_do": "With {name}, you can…",
+  "z": "Z"
 }

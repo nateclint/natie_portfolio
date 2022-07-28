@@ -15,6 +15,7 @@ import 'store/theme_store.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
+    name: "natie-portfolio",
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MultiProvider(

@@ -1,5 +1,13 @@
 import 'package:flutter/cupertino.dart';
 
+class _ListViewConstants {
+  static const List<Type> ignorePadding = [
+    IgnorePadding,
+    PaddedColumn,
+    PaddedRow,
+  ];
+}
+
 class PaddedColumn extends StatelessWidget {
   final EdgeInsets padding;
   final MainAxisAlignment mainAxisAlignment;
@@ -25,6 +33,9 @@ class PaddedColumn extends StatelessWidget {
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       children: children.map((child) {
+        if (_ListViewConstants.ignorePadding.contains(child.runtimeType)) {
+          return child;
+        }
         final noPad = !paddingStartAndEnd &&
             (child == children.first || child == children.last);
         return Padding(
@@ -61,6 +72,9 @@ class PaddedRow extends StatelessWidget {
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       children: children.map((child) {
+        if (_ListViewConstants.ignorePadding.contains(child.runtimeType)) {
+          return child;
+        }
         final noPad = !paddingStartAndEnd &&
             (child == children.first || child == children.last);
         return Padding(
@@ -70,4 +84,14 @@ class PaddedRow extends StatelessWidget {
       }).toList(),
     );
   }
+}
+
+/// A wrapper to ignore padding in a padded widgets
+class IgnorePadding extends StatelessWidget {
+  final Widget child;
+
+  const IgnorePadding({Key? key, required this.child}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) => child;
 }
