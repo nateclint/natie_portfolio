@@ -67,10 +67,6 @@ class _ProjectPageState extends State<ProjectPage> {
   void _initBody() {
     _body = SingleChildScrollView(
       controller: _scrollController,
-      padding: const EdgeInsets.symmetric(
-        horizontal: Dimens.pageContentPaddingHorizontal,
-        vertical: Dimens.pageContentPaddingVertical,
-      ),
       child: PaddedColumn(
         paddingStartAndEnd: false,
         padding: const EdgeInsets.symmetric(

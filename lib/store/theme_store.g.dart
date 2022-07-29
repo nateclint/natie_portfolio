@@ -29,7 +29,7 @@ mixin _$ThemeStore on _ThemeStore, Store {
       AsyncAction('_ThemeStore.getActiveTheme', context: context);
 
   @override
-  Future getActiveTheme() {
+  Future<void> getActiveTheme() {
     return _$getActiveThemeAsyncAction.run(() => super.getActiveTheme());
   }
 
@@ -37,7 +37,7 @@ mixin _$ThemeStore on _ThemeStore, Store {
       AsyncAction('_ThemeStore.setActiveTheme', context: context);
 
   @override
-  Future setActiveTheme(ThemeMode theme) {
+  Future<void> setActiveTheme(ThemeMode theme) {
     return _$setActiveThemeAsyncAction.run(() => super.setActiveTheme(theme));
   }
 

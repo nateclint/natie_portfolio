@@ -9,18 +9,18 @@ part of 'animation_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AnimationStore on _AnimationStore, Store {
-  late final _$isDoneAtom =
-      Atom(name: '_AnimationStore.isDone', context: context);
+  late final _$willStartAtom =
+      Atom(name: '_AnimationStore.willStart', context: context);
 
   @override
   bool get willStart {
-    _$isDoneAtom.reportRead();
+    _$willStartAtom.reportRead();
     return super.willStart;
   }
 
   @override
   set willStart(bool value) {
-    _$isDoneAtom.reportWrite(value, super.willStart, () {
+    _$willStartAtom.reportWrite(value, super.willStart, () {
       super.willStart = value;
     });
   }
@@ -31,7 +31,7 @@ mixin _$AnimationStore on _AnimationStore, Store {
   @override
   void start() {
     final _$actionInfo = _$_AnimationStoreActionController.startAction(
-        name: '_AnimationStore.setDone');
+        name: '_AnimationStore.start');
     try {
       return super.start();
     } finally {
@@ -42,7 +42,7 @@ mixin _$AnimationStore on _AnimationStore, Store {
   @override
   void stop() {
     final _$actionInfo = _$_AnimationStoreActionController.startAction(
-        name: '_AnimationStore.setNotDone');
+        name: '_AnimationStore.stop');
     try {
       return super.stop();
     } finally {
@@ -53,7 +53,7 @@ mixin _$AnimationStore on _AnimationStore, Store {
   @override
   String toString() {
     return '''
-isDone: ${willStart}
+willStart: ${willStart}
     ''';
   }
 }

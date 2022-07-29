@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "89304056390",
+    "project_id": "natie-portfolio-29030",
+    "storage_bucket": "natie-portfolio-29030.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:89304056390:android:195c8736e43805c6508047",
+        "android_client_info": {
+          "package_name": "com.example.natie_portfolio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "89304056390-d0haovmco8jlako7m3jelphl434lds0p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGnLX_Jm7PCfbV3Lrs8TwdClKAELC98lA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "89304056390-d0haovmco8jlako7m3jelphl434lds0p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

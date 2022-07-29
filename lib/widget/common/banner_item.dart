@@ -8,6 +8,7 @@ import 'package:natie_portfolio/global/styles.dart';
 import 'package:natie_portfolio/global/vars.dart';
 import 'package:natie_portfolio/store/animation_store.dart';
 
+import 'animated_view.dart';
 import 'buttons.dart';
 import 'image_view.dart';
 import 'list_view.dart';
@@ -146,29 +147,23 @@ class _BannerItemState extends State<BannerItem> {
       child: Observer(builder: (context) {
         return Stack(
           children: [
-            AnimatedSlide(
+            FadeSlideAnimation(
               offset: _introAni.willStart
                   ? Offset.zero
                   : const Offset(Dimens.bannerSlideOffset, 0),
+              opacity: _introAni.willStart ? 1 : 0,
               duration: Vars.animationSluggish,
               curve: Curves.easeOut,
-              child: AnimatedOpacity(
-                opacity: _introAni.willStart ? 1 : 0,
-                duration: Vars.animationFast,
-                child: _rightSide,
-              ),
+              child: _rightSide,
             ),
-            AnimatedSlide(
+            FadeSlideAnimation(
               offset: _introAni.willStart
                   ? Offset.zero
                   : const Offset(-Dimens.bannerSlideOffset, 0),
+              opacity: _introAni.willStart ? 1 : 0,
               duration: Vars.animationSluggish,
               curve: Curves.easeOut,
-              child: AnimatedOpacity(
-                opacity: _introAni.willStart ? 1 : 0,
-                duration: Vars.animationFast,
-                child: _leftSide,
-              ),
+              child: _leftSide,
             ),
           ],
         );

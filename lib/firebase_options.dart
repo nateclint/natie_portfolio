@@ -21,10 +21,7 @@ class DefaultFirebaseOptions {
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for android - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return android;
       case TargetPlatform.iOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for ios - '
@@ -33,6 +30,16 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
       default:
@@ -48,6 +55,14 @@ class DefaultFirebaseOptions {
     messagingSenderId: '89304056390',
     projectId: 'natie-portfolio-29030',
     authDomain: 'natie-portfolio-29030.firebaseapp.com',
+    storageBucket: 'natie-portfolio-29030.appspot.com',
+  );
+
+  static const FirebaseOptions android = FirebaseOptions(
+    apiKey: 'AIzaSyDGnLX_Jm7PCfbV3Lrs8TwdClKAELC98lA',
+    appId: '1:89304056390:android:195c8736e43805c6508047',
+    messagingSenderId: '89304056390',
+    projectId: 'natie-portfolio-29030',
     storageBucket: 'natie-portfolio-29030.appspot.com',
   );
 }

@@ -29,7 +29,7 @@ mixin _$LanguageStore on _LanguageStore, Store {
       AsyncAction('_LanguageStore.getActiveLanguage', context: context);
 
   @override
-  Future getActiveLanguage() {
+  Future<void> getActiveLanguage() {
     return _$getActiveLanguageAsyncAction.run(() => super.getActiveLanguage());
   }
 
@@ -37,7 +37,7 @@ mixin _$LanguageStore on _LanguageStore, Store {
       AsyncAction('_LanguageStore.setActiveLanguage', context: context);
 
   @override
-  Future setActiveLanguage(Language language) {
+  Future<void> setActiveLanguage(Language language) {
     return _$setActiveLanguageAsyncAction
         .run(() => super.setActiveLanguage(language));
   }

@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -15,7 +16,7 @@ import 'store/theme_store.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    name: "natie-portfolio",
+    name: kReleaseMode ? "natie-portfolio" : null,
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(MultiProvider(

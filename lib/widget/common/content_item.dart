@@ -9,6 +9,7 @@ import 'package:natie_portfolio/store/animation_store.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 import '../../global/vars.dart';
+import 'animated_view.dart';
 import 'image_view.dart';
 import 'list_view.dart';
 import 'text_view.dart';
@@ -18,6 +19,7 @@ class CardItem extends StatefulWidget {
   final EdgeInsets padding;
   final VoidCallback? onPressed;
   final bool hoverFeedback;
+  final double hoverScale;
   final Duration hoverAnimationSpeed;
 
   const CardItem({
@@ -26,6 +28,7 @@ class CardItem extends StatefulWidget {
     this.padding = const EdgeInsets.all(Dimens.cardItemPadding),
     this.onPressed,
     this.hoverFeedback = false,
+    this.hoverScale = 1.2,
     this.hoverAnimationSpeed = Vars.animationFast,
   }) : super(key: key);
 
@@ -34,50 +37,20 @@ class CardItem extends StatefulWidget {
 }
 
 class _CardItemState extends State<CardItem> {
-  late bool _hoverFeedback;
-  late Duration _hoverAnimationSpeed;
-
-  final AnimationStore _hoverAni = AnimationStore();
-
-  @override
-  void initState() {
-    super.initState();
-    _hoverFeedback = widget.hoverFeedback;
-    _hoverAnimationSpeed = widget.hoverAnimationSpeed;
-  }
-
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (context) {
-      return InkWell(
-        onTap: widget.onPressed ?? (_hoverFeedback ? () {} : null),
-        mouseCursor: _hoverFeedback && widget.onPressed == null
-            ? MouseCursor.uncontrolled
-            : null,
-        splashFactory: NoSplash.splashFactory,
-        hoverColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        focusColor: Colors.transparent,
-        onHover: (isHover) {
-          if (!_hoverFeedback) return;
-          if (isHover) {
-            _hoverAni.start();
-          } else {
-            _hoverAni.stop();
-          }
-        },
-        child: AnimatedScale(
-          scale: _hoverAni.willStart ? 1.2 : 1,
-          duration: _hoverAnimationSpeed,
-          child: Card(
-            child: Padding(
-              padding: widget.padding,
-              child: widget.child,
-            ),
-          ),
+    return AnimatedHover(
+      scaleOnHover: widget.hoverScale,
+      duration: widget.hoverAnimationSpeed,
+      onPressed: widget.onPressed,
+      feedback: widget.hoverFeedback,
+      child: Card(
+        child: Padding(
+          padding: widget.padding,
+          child: widget.child,
         ),
-      );
-    });
+      ),
+    );
   }
 }
 
@@ -198,26 +171,21 @@ class _FunctionalityItemState extends State<FunctionalityItem> {
   @override
   Widget build(BuildContext context) {
     _initContentCard();
-    return Observer(builder: (context) {
-      return VisibilityDetector(
-        key: Key('${_p.id}_$_i'),
-        onVisibilityChanged: (visibility) {
-          if (visibility.visibleFraction > .5) {
-            if (!_visibleAni.willStart) _visibleAni.start();
-          }
-        },
-        child: AnimatedSlide(
-          offset: _visibleAni.willStart
-              ? Offset.zero
-              : const Offset(0, -Dimens.projectDetailsFuncOffset),
-          duration: Vars.animationFast,
-          child: AnimatedOpacity(
-            opacity: _visibleAni.willStart ? 1 : 0,
-            duration: Vars.animationFast,
-            child: _contentCard,
-          ),
-        ),
-      );
-    });
+    return VisibilityDetector(
+      key: Key('${_p.id}_$_i'),
+      onVisibilityChanged: (visibility) {
+        if (visibility.visibleFraction > .5) {
+          if (!_visibleAni.willStart) _visibleAni.start();
+        }
+      },
+      child: FadeSlideAnimation(
+        offset: _visibleAni.willStart
+            ? Offset.zero
+            : const Offset(0, -Dimens.projectDetailsFuncOffset),
+        opacity: _visibleAni.willStart ? 1 : 0,
+        duration: Vars.animationFast,
+        child: _contentCard,
+      ),
+    );
   }
 }

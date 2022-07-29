@@ -272,6 +272,7 @@ class Projects {
           'và/hoặc hình ảnh',
       'Tương tác với bài đăng: thích, bình luận, đặt hẹn nhắc, copy nội dung',
       'Tìm kiếm cứu trợ lân cận & hỗ trợ kỹ thuật',
+      'Quản lý hồ sơ người dùng: bài đăng & thông tin cá nhân',
       '[Admin] Quản lý Phòng: Xem thông tin phòng, '
           'Thêm/xóa cư dân trong một phòng',
       '[Admin] Quản lý Bài Đăng: Xóa Bài Đăng',
